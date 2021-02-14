@@ -1,0 +1,3 @@
+displayName = Dynasty Mod
+author = Squirtle Squad Programming
+version = 0.1
