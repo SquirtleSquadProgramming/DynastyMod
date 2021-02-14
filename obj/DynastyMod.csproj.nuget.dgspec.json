@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Daniel\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\XiJinpingVirusProject\\DynastyMod.csproj": {}
+    "C:\\Users\\Daniel\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\DynastyMod\\DynastyMod.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Daniel\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\XiJinpingVirusProject\\DynastyMod.csproj": {
+    "C:\\Users\\Daniel\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\DynastyMod\\DynastyMod.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Daniel\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\XiJinpingVirusProject\\DynastyMod.csproj",
+        "projectUniqueName": "C:\\Users\\Daniel\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\DynastyMod\\DynastyMod.csproj",
         "projectName": "DynastyMod",
-        "projectPath": "C:\\Users\\Daniel\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\XiJinpingVirusProject\\DynastyMod.csproj",
+        "projectPath": "C:\\Users\\Daniel\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\DynastyMod\\DynastyMod.csproj",
         "packagesPath": "C:\\Users\\Daniel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Daniel\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\XiJinpingVirusProject\\obj\\",
+        "outputPath": "C:\\Users\\Daniel\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\DynastyMod\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Daniel\\AppData\\Roaming\\NuGet\\NuGet.Config",

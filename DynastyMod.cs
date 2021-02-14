@@ -1,6 +1,6 @@
 using Terraria.ModLoader;
 
-namespace XiJinpingVirusProject
+namespace DynastyMod
 {
 	public class DynastyMod : Mod
 	{

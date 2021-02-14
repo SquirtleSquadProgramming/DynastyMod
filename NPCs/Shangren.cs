@@ -3,7 +3,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Localization;
 
-namespace XiJinpingVirusProject.NPCs
+namespace DynastyMod.NPCs
 {
     [AutoloadHead]
     public class Shangren : ModNPC
@@ -12,7 +12,7 @@ namespace XiJinpingVirusProject.NPCs
 
         public override string Texture
         {
-            get { return "XiJinpingVirusProject/NPCs/Shangren"; }
+            get { return "DynastyMod/NPCs/Shangren"; }
         }
 
         public override bool Autoload(ref string name)
@@ -72,32 +72,37 @@ namespace XiJinpingVirusProject.NPCs
         // TBE
         public override string GetChat()
         {
-            return base.GetChat();
+            string[] Lines = new string[] { "Never do to others what you would not like them to do to you.", "Wheresoever you go, go with all your heart.", "Our greatest glory is not in never falling, but in rising every time we fall.", "I hear and I forget. I see and I remember. I do and I understand.", "It does not matter how slowly you go so long as you do not stop." };
+            return Lines[WorldGen.genRand.Next(Lines.Length)];
         }
 
         public override void SetChatButtons(ref string button, ref string button2)
         {
             button = Language.GetTextValue("LegacyInterface.28");
-            button2 = "Custom";
         }
 
         public override void OnChatButtonClicked(bool firstButton, ref bool shop)
         {
-            if(firstButton)
+            if (firstButton)
             {
                 shop = true;
             }
-            else
-            {
-                Main.npcChatText = "Tset test";
-            }
         }
 
-        public override void SetupShop(Chest shop, ref int nextSlot)
+        public override void SetupShop(Chest shop, ref int slot)
         {
-            shop.item[nextSlot].SetDefaults(2);
-            shop.item[nextSlot].value = 10000;
-            nextSlot++;
+            //(ID,  vanilla), price
+            (short, int)[] ShopItems = new (short, int)[] { (ItemID.DirtBlock, 10000), (ItemID.DiamondStaff, 1), (ItemID.DiscoBall, 100000), ((short)mod.ItemType("TempItem"), 1000)};
+
+            foreach ((short, int) item in ShopItems)
+            {
+                shop.item[slot].SetDefaults(item.Item1);
+                shop.item[slot].value = item.Item2;
+                slot++;
+            }
+            //shop.item[slot].SetDefaults(ItemID.DirtBlock);
+            //shop.item[slot].value = 10000;
+            //slot++;
         }
 
         public override void NPCLoot()
