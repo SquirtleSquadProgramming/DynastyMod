@@ -15,7 +15,7 @@ namespace DynastyMod.NPCs.Vermillion_Bird
 
 		public override void SetDefaults()
 		{
-			npc.aiStyle = -1; // need to add ai
+			npc.aiStyle = 4; // need to add ai
 			npc.lifeMax = 2000;
 			npc.damage = 100;
 			npc.defense = 55;
