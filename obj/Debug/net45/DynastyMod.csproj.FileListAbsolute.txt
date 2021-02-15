@@ -1,4 +1,0 @@
-C:\Users\Daniel\Documents\My Games\Terraria\ModLoader\Mod Sources\DynastyMod\obj\Debug\net45\DynastyMod.csprojAssemblyReference.cache
-C:\Users\Daniel\Documents\My Games\Terraria\ModLoader\Mod Sources\DynastyMod\obj\Debug\net45\DynastyMod.AssemblyInfoInputs.cache
-C:\Users\Daniel\Documents\My Games\Terraria\ModLoader\Mod Sources\DynastyMod\obj\Debug\net45\DynastyMod.AssemblyInfo.cs
-C:\Users\Daniel\Documents\My Games\Terraria\ModLoader\Mod Sources\DynastyMod\obj\Debug\net45\DynastyMod.csproj.CoreCompileInputs.cache
