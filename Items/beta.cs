@@ -29,7 +29,7 @@ namespace DynastyMod.Items
 			item.rare = ItemRarityID.Green; 
 			item.UseSound = SoundID.Item11; 
 			item.autoReuse = true; 
-			item.shoot = ModContent.ProjectileType<funnyProjectile>();
+			item.shoot = ModContent.ProjectileType<Projectiles.funnyProjectile>();
 			item.shootSpeed = 16f; 
 			item.useAmmo = ModContent.ItemType<funnyBullet>();
 		}
