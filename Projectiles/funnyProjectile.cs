@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
-namespace DynastyMod.Items
+namespace DynastyMod.Projectiles
 {
 	public class funnyProjectile : ModProjectile
 	{
