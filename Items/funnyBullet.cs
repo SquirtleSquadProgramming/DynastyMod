@@ -24,7 +24,7 @@ namespace DynastyMod.Items
 			item.knockBack = 1.5f;
 			item.value = 10;
 			item.rare = ItemRarityID.Green;
-			item.shoot = ModContent.ProjectileType<funnyProjectile>();   
+			item.shoot = ModContent.ProjectileType<Projectiles.funnyProjectile>();   
 			item.shootSpeed = 16f;                  
 			item.ammo = item.type;              
 		}
