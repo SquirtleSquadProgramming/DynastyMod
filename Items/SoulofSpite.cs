@@ -11,12 +11,12 @@ using Terraria.ModLoader;
 
 namespace DynastyMod.Items
 {
-    public class ExampleSoul : ModItem
+    public class SoulofSpite : ModItem
     {
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Soul of Spite");
-            Tooltip.SetDefault("'The essence of the Hitodama'");
+            Tooltip.SetDefault("'The essence of betrayed ancestors.'");
 
             Main.RegisterItemAnimation(item.type, new DrawAnimationVertical(5, 4)); // ticksperframe, frameCount
             ItemID.Sets.AnimatesAsSoul[item.type] = true;
