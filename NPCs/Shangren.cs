@@ -92,7 +92,7 @@ namespace DynastyMod.NPCs
         public override void SetupShop(Chest shop, ref int slot)
         {
             //(ID,  vanilla), price
-            (short, int)[] ShopItems = new (short, int)[] { (ItemID.DynastyWood, 50), (ItemID.RedDynastyShingles, 50), (ItemID.BlueDynastyShingles, 50)};
+            (short, int)[] ShopItems = new (short, int)[] { (ItemID.DynastyWood, 50), (ItemID.RedDynastyShingles, 50), (ItemID.BlueDynastyShingles, 50), ((short)mod.ItemType("BlankScroll"), 10000) };
 
             foreach ((short, int) item in ShopItems)
             {

@@ -18,7 +18,7 @@ namespace DynastyMod.Items
             item.height = 20;
             item.maxStack = 999;
             item.value = 10000;
-            item.rare = ItemRarityID.Blue;
+            item.rare = ItemRarityID.Purple;
         }
 
         public override void AddRecipes()
