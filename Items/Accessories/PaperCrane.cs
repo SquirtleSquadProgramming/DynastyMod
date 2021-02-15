@@ -9,7 +9,7 @@ namespace DynastyMod.Items.Accessories
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Heals you by 20 health for every 200 mana consumed.");
+            Tooltip.SetDefault("Awards money for damage dealt by flying enemies.");
         }
 
         public override void SetDefaults()
