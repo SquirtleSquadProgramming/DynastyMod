@@ -92,7 +92,7 @@ namespace DynastyMod.NPCs
         public override void SetupShop(Chest shop, ref int slot)
         {
             //(ID,  vanilla), price
-            (short, int)[] ShopItems = new (short, int)[] { (ItemID.DirtBlock, 10000), (ItemID.DiamondStaff, 1), (ItemID.DiscoBall, 100000), ((short)mod.ItemType("TempItem"), 1000)};
+            (short, int)[] ShopItems = new (short, int)[] { (ItemID.DynastyWood, 50), (ItemID.RedDynastyShingles, 50), (ItemID.BlueDynastyShingles, 50)};
 
             foreach ((short, int) item in ShopItems)
             {
@@ -100,9 +100,6 @@ namespace DynastyMod.NPCs
                 shop.item[slot].value = item.Item2;
                 slot++;
             }
-            //shop.item[slot].SetDefaults(ItemID.DirtBlock);
-            //shop.item[slot].value = 10000;
-            //slot++;
         }
 
         public override void NPCLoot()
@@ -124,7 +121,7 @@ namespace DynastyMod.NPCs
 
         public override void TownNPCAttackProj(ref int projType, ref int attackDelay)
         {
-            projType = ProjectileID.DemonScythe;
+            projType = ProjectileID.DemonScythe; // Could be some magic type of weapon, like a scroll or a star based weapon
             attackDelay = 1;
         }
 

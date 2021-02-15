@@ -24,16 +24,16 @@ namespace DynastyMod.Items
         public override void AddRecipes()
         {
             ModRecipe recipe;
-            (short?[], int[], int)[] Recipes = new (short?[], int[], int)[] {
-                (new short?[] { ItemID.DirtBlock }, new int[] { 1 }, 2),
-                (new short?[] { ItemID.SnowBlock }, new int[] { 2 }, 3),
-                (null, new int[] { 0 }, 1)
+            (short[], int[], int)[] Recipes = new (short[], int[], int)[] {
+                (new short[] { ItemID.DirtBlock }, new int[] { 1 }, 2),
+                (new short[] { ItemID.SnowBlock }, new int[] { 2 }, 3),
+                (new short[0], new int[0], 1)
             };
 
-            foreach ((short?[], int[], int) R in Recipes)
+            foreach ((short[], int[], int) R in Recipes)
             {
                 recipe = new ModRecipe(mod);
-                if (R.Item1 != null || R.Item1.Length != R.Item2.Length)
+                if (R.Item1.Length != 0 && R.Item1.Length == R.Item2.Length)
                     for (int i = 0; i < R.Item1.Length; i++)
                         recipe.AddIngredient((int)R.Item1[i], R.Item2[i]);
                 recipe.SetResult(this, R.Item3);
