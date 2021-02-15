@@ -24,7 +24,7 @@ namespace DynastyMod.Items
 			item.value = 10000;
 			item.rare = ItemRarityID.Green;
 			item.shootSpeed = 16f;
-			item.useAmmo = mod.ProjectileType("Scroll");
+			item.type = mod.ItemType("CursedFlameScroll");
 			item.shoot = ProjectileID.CursedFlameFriendly;
 			item.ammo = item.type;
 		}

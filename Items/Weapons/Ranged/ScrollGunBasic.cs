@@ -32,11 +32,11 @@ namespace DynastyMod.Items.Weapons.Ranged
 			item.UseSound = SoundID.Item11;
 			item.autoReuse = true;
 			item.shootSpeed = 16f;
-			item.useAmmo = mod.ProjectileType("Scroll");
-            //item.shoot = ProjectileID.CursedFlameFriendly;
+			item.useAmmo = mod.ItemType("CursedFlameScroll");
+            item.shoot = ProjectileID.Bubble;
 		}
 
-		/*public override void AddRecipes()
+        /*public override void AddRecipes()
 		{
 			ModRecipe recipe = new ModRecipe(mod);
 			recipe.AddIngredient(ModContent.ItemType<ExampleItem>(), 10);
@@ -45,16 +45,17 @@ namespace DynastyMod.Items.Weapons.Ranged
 			recipe.AddRecipe();
 		}*/
 
-
-		//Called just before the bullet is made - meant to be used for speacal bullet effects
-		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
-		{	
-			Projectile.NewProjectile(position, new Vector2(speedX, speedY), type, damage, knockBack);
-			mod.Logger.Info($"{type} {ProjectileID.CursedFlameFriendly}");
+        //Called just before the bullet is made - meant to be used for speacal bullet effects
+        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+		{
 			lastDam = damage - 20;
 			return true;
 		}
+
 		//Called all the time - modify mana by the damage done by the gun before it shoot - will be changed later when sean tells me how he wants it changed
-		public override void ModifyManaCost(Player player, ref float reduce, ref float mult) => mult = lastDam / 2;
+		public override void ModifyManaCost(Player player, ref float reduce, ref float mult)
+		{
+			mult = lastDam / 2;
+		}
 	}
 }
