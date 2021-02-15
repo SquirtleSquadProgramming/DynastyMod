@@ -24,12 +24,14 @@ namespace DynastyMod
             paperCrane = false;
         }
 
-        public override void Hurt(bool pvp, bool quiet, double damage, int hitDirection, bool crit)
+
+        public override void OnHitByNPC(NPC npc, int damage, bool crit)
         {
-            // If the player is moving faster than a velocity of 3 and they have a paper crane equipped, award silver coins on damage
-            if ((player.bodyVelocity.X > 3 || player.bodyVelocity.Y > 3 || player.bodyVelocity.X < 3 || player.bodyVelocity.Y < 3) && paperCrane)
+  
+            // If the enemy is a flying type enemy and the player has a paper crane equipped as an accessory, award copper coins
+            if ((npc.aiStyle == 2 || npc.aiStyle == 14 || npc.aiStyle == 22 || npc.aiStyle == 17 || npc.aiStyle == 11) && paperCrane)
             {
-                player.QuickSpawnItem(ItemID.SilverCoin, Convert.ToInt32(damage / 12));
+                player.QuickSpawnItem(ItemID.CopperCoin, Convert.ToInt32(damage / 2));
             }
         }
     }
