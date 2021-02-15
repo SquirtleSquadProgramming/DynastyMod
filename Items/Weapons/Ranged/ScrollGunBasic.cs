@@ -20,9 +20,9 @@ namespace DynastyMod.Items.Weapons.Ranged
 			item.ranged = true;
 			item.width = 40;
 			item.height = 20;
-			//item.magic = true;
-			//item.mana = 2;
-			item.useTime = 20;
+            item.magic = true;
+            item.mana = 2;
+            item.useTime = 20;
 			item.useAnimation = 20;
 			item.useStyle = ItemUseStyleID.HoldingOut;
 			item.noMelee = true;
@@ -36,33 +36,9 @@ namespace DynastyMod.Items.Weapons.Ranged
 			item.shoot = ProjectileID.Bullet;
 		}
 
-        /*public override void AddRecipes()
-		{
-			ModRecipe recipe = new ModRecipe(mod);
-			recipe.AddIngredient(ModContent.ItemType<ExampleItem>(), 10);
-			recipe.AddTile(ModContent.TileType<ExampleWorkbench>());
-			recipe.SetResult(this);
-			recipe.AddRecipe();
-		}*/
-
         //Called just before the bullet is made - meant to be used for speacal bullet effects
         public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
         {
-            if (type == ProjectileID.CursedFlameFriendly)
-            {
-                type = ProjectileID.CursedFlameFriendly;
-            }
-            else if (type == ProjectileID.IceBolt)
-            {
-                type = ProjectileID.IceBolt;
-            }
-            else
-            {
-                return false;
-            }
-
-            Vector2 perturbedSpeed = new Vector2(speedX, speedY).RotatedByRandom(MathHelper.ToRadians(0));
-            Projectile.NewProjectile(position.X, position.Y, perturbedSpeed.X, perturbedSpeed.Y, type, damage, knockBack, player.whoAmI);
             lastDam = damage - 20;
             return true;
         }
