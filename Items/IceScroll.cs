@@ -24,9 +24,8 @@ namespace DynastyMod.Items
 			item.value = 10000;
 			item.rare = ItemRarityID.Green;
 			item.shootSpeed = 16f;
-			item.type = mod.ItemType("IceScroll");
-			item.shoot = ProjectileID.IceBlock;
-			item.ammo = item.type;
+			item.shoot = ProjectileID.IceBolt;
+			item.ammo = 100;
 		}
 	}
 }
