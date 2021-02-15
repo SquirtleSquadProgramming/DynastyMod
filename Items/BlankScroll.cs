@@ -5,7 +5,7 @@ using Terraria.Localization;
 
 namespace DynastyMod.Items
 {
-    class BlankScroll : ModItem
+    public class BlankScroll : ModItem
     {
         public override void SetStaticDefaults()
         {
