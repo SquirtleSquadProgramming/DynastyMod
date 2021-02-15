@@ -30,10 +30,11 @@ namespace DynastyMod.NPCs
 			banner = Item.NPCtoBanner(NPCID.Zombie);
 			bannerItem = Item.BannerToItem(banner);
 		}
-		public override float SpawnChance(NPCSpawnInfo spawnInfo)
+		//Grandma prob wont spawn random might be event npc
+		/*public override float SpawnChance(NPCSpawnInfo spawnInfo)
 		{
-			return SpawnCondition.OverworldNightMonster.Chance * 0.05f;
-		}
+			return SpawnCondition.OverworldDay.Chance * 0.9f;
+		}*/
 		public override void NPCLoot()
 		{
 			Item.NewItem(npc.getRect(), (short)ModContent.ItemType<Items.RedEnvelope>());
