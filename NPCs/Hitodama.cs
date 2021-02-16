@@ -22,7 +22,7 @@ namespace DynastyMod.NPCs
         {
             npc.width = 32;
             npc.height = 32;
-            npc.aiStyle = 22;
+            npc.aiStyle = -1;
             npc.damage = 68;
             npc.defense = 30;
             npc.lifeMax = 200;
