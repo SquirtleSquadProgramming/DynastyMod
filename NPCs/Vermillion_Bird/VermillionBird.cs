@@ -87,16 +87,17 @@ namespace DynastyMod.NPCs.Vermillion_Bird
 
 		private void StarAttack()
 		{ 
-			Vector2[] directions = new Vector2[] { new Vector2(0f, 10f), new Vector2(10f, 10f), new Vector2(10f, 0f), new Vector2(10f, -10f), new Vector2(0f, -10f), new Vector2(-10f, -10f), new Vector2(-10f, 0), new Vector2(-10f, 10f) };
+			Vector2[] strDirections = new Vector2[] { new Vector2(0f, 10f), new Vector2(10f, 10f), new Vector2(10f, 0f), new Vector2(10f, -10f), new Vector2(0f, -10f), new Vector2(-10f, -10f), new Vector2(-10f, 0), new Vector2(-10f, 10f) };
+			Vector2[] diaDirections = new Vector2[] { new Vector2(5f, 10f), new Vector2(10f, 5f), new Vector2(10f, -5f), new Vector2(5f, -10f), new Vector2(-5f, -10f), new Vector2(-10f, -5f), new Vector2(-10f, 5f), new Vector2(-5f, 10f) };
 			Vector2 pos = new Vector2(npc.position.X + (5.25f * CM.X), npc.position.Y + (0 * CM.Y));
 			if (cooldown == (int)(1.25f * tickSpeed))
-				directions.ToList().ForEach(n => Projectile.NewProjectile(pos, n, ProjectileID.Fireball, 10, 0f));
+				strDirections.ToList().ForEach(n => Projectile.NewProjectile(pos, n, ProjectileID.Fireball, 10, 0f));
 			else if (cooldown == (int)(1f * tickSpeed))
-				directions.ToList().ForEach(n => Projectile.NewProjectile(pos, n, ProjectileID.Fireball, 10, 0f));
+				diaDirections.ToList().ForEach(n => Projectile.NewProjectile(pos, n, ProjectileID.Fireball, 10, 0f));
 			else if (cooldown == (int)(0.75f * tickSpeed))
-				directions.ToList().ForEach(n => Projectile.NewProjectile(pos, n, ProjectileID.Fireball, 10, 0f));
+				strDirections.ToList().ForEach(n => Projectile.NewProjectile(pos, n, ProjectileID.Fireball, 10, 0f));
 			else if (cooldown == (int)(0.5f * tickSpeed))
-				directions.ToList().ForEach(n => Projectile.NewProjectile(pos, n, ProjectileID.Fireball, 10, 0f));
+				diaDirections.ToList().ForEach(n => Projectile.NewProjectile(pos, n, ProjectileID.Fireball, 10, 0f));
 		}
 
 		int count = 0;
