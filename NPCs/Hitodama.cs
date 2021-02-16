@@ -15,7 +15,7 @@ namespace DynastyMod.NPCs
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Hitodama");
-            Main.npcFrameCount[npc.type] = 6; // make sure to set this for your modnpcs.
+            Main.npcFrameCount[npc.type] = 6;
         }
 
         public override void SetDefaults()
@@ -32,67 +32,24 @@ namespace DynastyMod.NPCs
             npc.DeathSound = SoundID.Item110;
             aiType = -1;
             npc.value = 25f;
-            
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
-        {
-            if (Main.hardMode)
-            {
-                return SpawnCondition.OverworldNightMonster.Chance * 0.01f;
-            }
-            else
-            {
-                return 0.0f;
-            }
-        }
+        public override float SpawnChance(NPCSpawnInfo spawnInfo) => (Main.hardMode) ? SpawnCondition.OverworldNightMonster.Chance * 0.01f : 0.0f;
 
         public override void AI()
         {
+            Lighting.AddLight(new Vector2(npc.position.X - 0.5f, npc.position.Y), Color.Orange.ToVector3() * 0.5f); // Lighting (thought you might like this)
             npc.TargetClosest(true);
         }
 
+        private int count = 0;
         public override void FindFrame(int frameHeight)
         {
             npc.spriteDirection = npc.direction;
-            int count;
-            if (npc.frameCounter > Main.npcFrameCount[npc.type] * 10)
-            {
-                count = 0;
-                npc.frameCounter = 0;
-            }
-            else
-            {
-                
-                switch((int)npc.frameCounter)
-                {
-                    case 0:
-                        count = 0;
-                        break;
-                    case 10:
-                        count = 1;
-                        break;
-                    case 20:
-                        count = 2;
-                        break;
-                    case 30:
-                        count = 3;
-                        break;
-                    case 40:
-                        count = 4;
-                        break;
-                    case 50:
-                        count = 5;
-                        break;
-                    default:
-                        count = 0;
-                        break;
-                }
-            }
-            npc.frame.Y = count * 32;
+            count = (int)(npc.frameCounter / 10);
+            if (count == 5) npc.frameCounter = 0;
+            npc.frame.Y = count * frameHeight;
             npc.frameCounter++;
-            mod.Logger.Info(npc.frameCounter);
         }
-    }
-    
+    }  
 }
