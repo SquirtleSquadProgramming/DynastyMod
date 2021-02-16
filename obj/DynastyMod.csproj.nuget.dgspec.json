@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Daniel\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\DynastyMod\\DynastyMod.csproj": {}
+    "C:\\Users\\chder\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\DynastyMod\\DynastyMod.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Daniel\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\DynastyMod\\DynastyMod.csproj": {
+    "C:\\Users\\chder\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\DynastyMod\\DynastyMod.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Daniel\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\DynastyMod\\DynastyMod.csproj",
+        "projectUniqueName": "C:\\Users\\chder\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\DynastyMod\\DynastyMod.csproj",
         "projectName": "DynastyMod",
-        "projectPath": "C:\\Users\\Daniel\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\DynastyMod\\DynastyMod.csproj",
-        "packagesPath": "C:\\Users\\Daniel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Daniel\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\DynastyMod\\obj\\",
+        "projectPath": "C:\\Users\\chder\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\DynastyMod\\DynastyMod.csproj",
+        "packagesPath": "C:\\Users\\chder\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\chder\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\DynastyMod\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Daniel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\chder\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,6 +26,7 @@
         },
         "frameworks": {
           "net45": {
+            "targetAlias": "net45",
             "projectReferences": {}
           }
         },
@@ -37,13 +38,14 @@
       },
       "frameworks": {
         "net45": {
+          "targetAlias": "net45",
           "dependencies": {
             "tModLoader.CodeAssist": {
               "target": "Package",
               "version": "[0.1.*, )"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     }

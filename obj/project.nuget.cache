@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "yFjB5ST7/LFn/+WkgnXMs8BFFMJpZtc6k8r6Eu4tndwaADM0ysZ0GQQ2Pb3wCabF1IJjnW5glj3YdTwcjqvi8Q==",
+  "dgSpecHash": "mF9ORqFvq4WzxS8IY02soNFdCUlxUJxpsXaApamRGhNAkPBzsK56ZSJ1ZZmEDCtGhk6LyapgKvr1jJIE9Ip5QA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Daniel\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\DynastyMod\\DynastyMod.csproj",
+  "projectFilePath": "C:\\Users\\chder\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\DynastyMod\\DynastyMod.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Daniel\\.nuget\\packages\\tmodloader.codeassist\\0.1.1\\tmodloader.codeassist.0.1.1.nupkg.sha512"
+    "C:\\Users\\chder\\.nuget\\packages\\tmodloader.codeassist\\0.1.1\\tmodloader.codeassist.0.1.1.nupkg.sha512"
   ],
   "logs": []
 }
