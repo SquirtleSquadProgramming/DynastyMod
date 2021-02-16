@@ -23,7 +23,7 @@ namespace DynastyMod.Items.Placeables
             item.useAnimation = 15;
             item.useTime = 10;
             item.autoReuse = true;
-            item.maxStack = 999;
+            item.maxStack = 99;
             item.consumable = true;
             item.createTile = ModContent.TileType<Tiles.GemCutter>();
         }
