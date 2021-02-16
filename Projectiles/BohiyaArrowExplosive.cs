@@ -25,6 +25,8 @@ namespace DynastyMod.Projectiles
 			projectile.light = 0.8f;
 			projectile.arrow = true;
 			projectile.scale = 0.9f;
+			projectile.aiStyle = 1;
+			
 		}
 
 		public override void AI()
@@ -55,8 +57,8 @@ namespace DynastyMod.Projectiles
 					Main.dust[dustIndex].position = projectile.Center + new Vector2(0f, (float)(-(float)projectile.height / 2 - 6)).RotatedBy((double)projectile.rotation, default(Vector2)) * 1.1f;
 				}
 			}
-			projectile.rotation = projectile.velocity.ToRotation() + MathHelper.ToRadians(90f);
-			projectile.velocity.Y += 0.25f;
+			/*projectile.rotation = projectile.velocity.ToRotation() + MathHelper.ToRadians(90f);
+			projectile.velocity.Y += 0.2f;*/
 			return;
 		}
 

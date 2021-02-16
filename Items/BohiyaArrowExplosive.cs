@@ -28,7 +28,7 @@ namespace DynastyMod.Items
 			item.rare = ItemRarityID.Blue;
 			item.shoot = ModContent.ProjectileType<Projectiles.BohiyaArrowExplosive>();   
 			item.shootSpeed = 1f;                  
-			item.ammo = item.type;              
+			item.ammo = 40;              
 		}
 		//Change This later
 		/*public override void AddRecipes()
