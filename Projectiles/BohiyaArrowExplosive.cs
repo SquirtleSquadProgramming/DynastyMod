@@ -11,7 +11,7 @@ namespace DynastyMod.Projectiles
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Explosive Arrow");
+			DisplayName.SetDefault("Bohiya Arrow");
 			ProjectileID.Sets.TrailCacheLength[projectile.type] = 5;    
 			ProjectileID.Sets.TrailingMode[projectile.type] = 0;        
 		}
@@ -26,7 +26,6 @@ namespace DynastyMod.Projectiles
 			projectile.arrow = true;
 			projectile.scale = 0.9f;
 			projectile.aiStyle = 1;
-			
 		}
 
 		public override void AI()
@@ -64,7 +63,7 @@ namespace DynastyMod.Projectiles
 
 		public override void Kill(int timeLeft)
 		{
-			//Main.PlaySound(SoundID.Item15, projectile.position);
+		    Main.PlaySound(SoundID.Item14, projectile.position);
 			for (int i = 0; i < 50; i++)
 			{
 				int dustIndex = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, 31, 0f, 0f, 100, default(Color), 2f);
@@ -108,9 +107,12 @@ namespace DynastyMod.Projectiles
 			projectile.position.Y = projectile.position.Y - (float)(projectile.height / 2);
 
 			//Explosive Size
-			projectile.Size += new Vector2(100);
+			projectile.Size = new Vector2(100);
 			projectile.Damage();
-			
+			projectile.position = projectile.Center;
+			projectile.Size = new Vector2(10);
+			projectile.Center = projectile.position;
+
 		}
 	}
 }
