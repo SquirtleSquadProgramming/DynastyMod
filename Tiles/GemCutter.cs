@@ -16,9 +16,9 @@ namespace DynastyMod.Tiles
 			Main.tileTable[Type] = true;
 			Main.tileLavaDeath[Type] = true;
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);
-			TileObjectData.newTile.CoordinateHeights = new[] { 36 };
-			// TileObjectData.addTile(Type);
-			AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
+			TileObjectData.newTile.CoordinateHeights = new[] { 18, 18 };
+            TileObjectData.addTile(Type);
+            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
 			ModTranslation name = CreateMapEntryName();
 			name.SetDefault("Example Workbench");
 			AddMapEntry(new Color(200, 200, 200), name);
