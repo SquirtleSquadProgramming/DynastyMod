@@ -25,7 +25,7 @@ namespace DynastyMod.NPCs.Vermillion_Bird
 			npc.defense = 55;
 			npc.knockBackResist = 0f;
 			npc.width = 100;
-			npc.height = 100;
+			npc.height = 110;
 			npc.scale = 1.5f;
 			npc.value = Item.buyPrice(0, 20, 0, 0);
 			npc.npcSlots = 15f;
@@ -56,16 +56,16 @@ namespace DynastyMod.NPCs.Vermillion_Bird
 		// Our AI here makes our NPC sit waiting for a player to enter range, jumps to attack, flutter mid-fall to stay afloat a little longer, then falls to the ground. Note that animation should happen in FindFrame
 		public override void AI()
 		{
-			Lighting.AddLight(new Vector2(npc.position.X + (5.25f * CM.X), npc.position.Y + (0 * CM.Y)), Color.Orange.ToVector3() * 0.5f);
-			Lighting.AddLight(new Vector2(npc.position.X + (5.25f * CM.X), npc.position.Y + (0 * CM.Y)), Color.Green.ToVector3() * 0.5f);
+			Lighting.AddLight(npc.Center, Color.Orange.ToVector3() * 1f);
+			Lighting.AddLight(npc.Center, Color.Green.ToVector3() * 1f);
 			npc.TargetClosest(true);
 			Vector2 targetPosition = Main.player[npc.target].position;
-			if (targetPosition.Y < npc.position.Y + (18*CM.Y) && npc.velocity.Y > -4)
+			if (targetPosition.Y < npc.Center.Y + (10 * CM.Y) && npc.velocity.Y > -4)
 				npc.velocity.Y -= DefaultAccelartion.Y; // accelerate up
-			if (targetPosition.Y > npc.position.Y + (18*CM.Y) && npc.velocity.Y < 4)
+			if (targetPosition.Y > npc.Center.Y + (10 * CM.Y) && npc.velocity.Y < 4)
 				npc.velocity.Y += DefaultAccelartion.Y; // accelerate down
 
-			npc.velocity.X = (cooldown > 0) ? 0 : (targetPosition.X - (3*CM.X) - npc.position.X) / (2*CM.X);
+			npc.velocity.X = (cooldown > 0) ? 0 : (targetPosition.X - npc.Center.X) / (2*CM.X);
 
 
             timer--;
@@ -76,24 +76,24 @@ namespace DynastyMod.NPCs.Vermillion_Bird
 				int RandomTime = WorldGen.genRand.Next(5);
                 switch (WorldGen.genRand.Next(6) % 3)
                 {
-                    case 0:
-						timer = RandomTime + (3 * tickSpeed);
+                    case 0: // Tracking Attack
 						cooldown = (int)(1.5f * tickSpeed);
+						timer = RandomTime + (1 * tickSpeed) + cooldown;
 						npc.velocity.X = 0;
 						currentAttack = Attack.Tracking;
 						break;
-                    case 1:
-						timer = RandomTime + (6 * tickSpeed);
+                    case 1: // Star Attack
 						cooldown = (int)(1.5f * tickSpeed);
-                        npc.velocity.X = 0;
+						timer = RandomTime + (4 * tickSpeed) + cooldown;
+						npc.velocity.X = 0;
                         currentAttack = Attack.Star;
                         break;
-					case 2:
+					case 2: // Sweep/hellfire Attack
 						cooldown = (int)(1.5f * tickSpeed);
-						timer = RandomTime + (10 * tickSpeed);
+						timer = RandomTime + (5 * tickSpeed) + cooldown;
 						npc.velocity.X = 0;
 						currentAttack = Attack.Sweep;
-						SweepDirection = (WorldGen.genRand.Next(2) == 0) ? 1 : -1;
+                        SweepDirection = (WorldGen.genRand.Next(2) == 0) ? 1 : -1;
 						break;
                 }
             }
@@ -105,10 +105,11 @@ namespace DynastyMod.NPCs.Vermillion_Bird
 		private float SweepDirection = 1;
 		private void SweepAttack()
 		{
-			if (WorldGen.genRand.Next(15) == 0) return;
+			int r = WorldGen.genRand.Next(30);
+			if (r == 0) return;
 			Vector2 direction = new Vector2(0f, 1f);
 			float speed = 4.5f;
-			Vector2 SpawnPosition = new Vector2(SweepDirection * npc.Center.X - (2 * cooldown * CM.X) - (45 * CM.X), npc.Center.Y - (20 * CM.Y));
+			Vector2 SpawnPosition = new Vector2((npc.Center.X - (SweepDirection * cooldown * CM.X) - (45 * CM.X)), npc.Center.Y - (-r + 20 * CM.Y));
 			Projectile.NewProjectile(SpawnPosition, direction * speed, ProjectileID.Fireball, 10, 0f, Main.myPlayer);
         }
 
