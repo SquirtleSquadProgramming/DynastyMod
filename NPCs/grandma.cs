@@ -20,8 +20,8 @@ namespace DynastyMod.NPCs
 			npc.damage = 0;
 			npc.defense = 6;
 			npc.lifeMax = 15;
-			npc.HitSound = SoundID.NPCHit1;
-			npc.DeathSound = SoundID.NPCDeath2;
+			npc.HitSound = SoundID.NPCHit2;
+			npc.DeathSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/grandma_death"); ;
 			npc.value = 60f;
 			npc.knockBackResist = 0.5f;
 			npc.aiStyle = 3;
