@@ -33,6 +33,9 @@ namespace DynastyMod.NPCs
 			animationType = NPCID.Zombie;
 			//banner = Item.NPCtoBanner(NPCID.Zombie);
 			//bannerItem = Item.BannerToItem(banner);
+			npc.spriteDirection = 1;
+			npc.velocity.X = 0.7f;
+			
 		}
 		//Grandma prob wont spawn random might be event npc
 		/*public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -43,25 +46,16 @@ namespace DynastyMod.NPCs
 		{
 			Item.NewItem(npc.getRect(), (short)ModContent.ItemType<Items.RedEnvelope>());
 		}
-		public override void OnHitByProjectile(Projectile projectile,int damage,float knockback,bool crit)
-		{
-			/*if (targetPosition.X < npc.position.X && npc.velocity.X > -8) 
-			{ 
-				npc.velocity.X += 0.22f; // accelerate to the left
-			}
 
-			if (targetPosition.X > npc.position.X && npc.velocity.X < 8)
-			{
-				//npc.spriteDirection = 1;
-				npc.velocity.X -= 0.22f; // accelerate to the right
-			}*/
-		}
-
-		public override void AI()
+		public override bool StrikeNPC(ref double damage,int defense,ref float knockback,int hitDirection,ref bool crit)
 		{
-			npc.TargetClosest(false);		
-			npc.spriteDirection = 1;
-			npc.velocity.X = 0.7f;		
+			mod.Logger.Info("Direction is " + hitDirection);
+			if (hitDirection == 1)
+				npc.velocity.X = 2f;
+			else if(hitDirection == -1)
+				npc.velocity.X = -2f;
+			npc.spriteDirection = hitDirection*1;
+			return true;
 		}
 	}
 }
