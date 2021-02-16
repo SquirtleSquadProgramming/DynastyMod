@@ -3,21 +3,21 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Utilities;
 
-namespace DynastyMod.Items.Accessories
+namespace DynastyMod.Items.Placeables
 {
-    public class JadeOre : ModItem
+    public class GemCutter : ModItem
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("A precious stone praised for its durability and supposed magical qualities.");
+            Tooltip.SetDefault("A precious stone prized for its durability and supposed magical qualities.");
         }
 
         public override void SetDefaults()
         {
-            item.width = 16;
-            item.height = 16;
-            item.value = Item.sellPrice(silver: 1);
-            item.rare = ItemRarityID.Green; // temp
+            item.width = 32;
+            item.height = 32;
+            item.value = Item.sellPrice(silver: 20);
+            item.rare = ItemRarityID.LightRed;
             item.useStyle = ItemUseStyleID.SwingThrow;
             item.useTurn = true;
             item.useAnimation = 15;
@@ -25,7 +25,7 @@ namespace DynastyMod.Items.Accessories
             item.autoReuse = true;
             item.maxStack = 999;
             item.consumable = true;
-            item.createTile = ModContent.TileType<Tiles.JadeOre>();
+            item.createTile = ModContent.TileType<Tiles.GemCutter>();
         }
 
         
