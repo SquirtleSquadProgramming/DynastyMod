@@ -28,7 +28,7 @@ namespace DynastyMod.Items.Placeables
         {
             ModRecipe recipe = new ModRecipe(mod);
             recipe.AddIngredient(ModContent.ItemType<RawJade>(), 1);
-            recipe.AddTile(TileID.AdamantiteForge);
+            recipe.AddTile(ModContent.TileType<Tiles.GemCutter>());
             recipe.SetResult(this);
             recipe.AddRecipe();
         }
