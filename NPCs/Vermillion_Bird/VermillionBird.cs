@@ -54,6 +54,8 @@ namespace DynastyMod.NPCs.Vermillion_Bird
 		// Our AI here makes our NPC sit waiting for a player to enter range, jumps to attack, flutter mid-fall to stay afloat a little longer, then falls to the ground. Note that animation should happen in FindFrame
 		public override void AI()
 		{
+			Lighting.AddLight(new Vector2(npc.position.X + (5.25f * CM.X), npc.position.Y + (0 * CM.Y)), Color.Orange.ToVector3() * 0.5f);
+			Lighting.AddLight(new Vector2(npc.position.X + (5.25f * CM.X), npc.position.Y + (0 * CM.Y)), Color.Green.ToVector3() * 0.5f);
 			npc.TargetClosest(true);
 			Vector2 targetPosition = Main.player[npc.target].position;
 			if (targetPosition.Y < npc.position.Y + (18*CM.Y) && npc.velocity.Y > -4)
