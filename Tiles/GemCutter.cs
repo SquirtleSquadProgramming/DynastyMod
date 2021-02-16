@@ -24,6 +24,8 @@ namespace DynastyMod.Tiles
 			AddMapEntry(new Color(200, 200, 200), name);
 			disableSmartCursor = true;
 			adjTiles = new int[] { TileID.WorkBenches };
+
+			drop = ModContent.ItemType<Items.Placeables.GemCutter>();
 		}
 
 		public override void KillMultiTile(int i, int j, int frameX, int frameY)

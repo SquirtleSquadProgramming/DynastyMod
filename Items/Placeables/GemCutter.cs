@@ -9,14 +9,14 @@ namespace DynastyMod.Items.Placeables
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("A precious stone prized for its durability and supposed magical qualities.");
+            Tooltip.SetDefault("A device designed to cut, shape, and polish jade.");
         }
 
         public override void SetDefaults()
         {
             item.width = 32;
             item.height = 32;
-            item.value = Item.sellPrice(silver: 20);
+            item.value = Item.sellPrice(silver: 2);
             item.rare = ItemRarityID.LightRed;
             item.useStyle = ItemUseStyleID.SwingThrow;
             item.useTurn = true;
