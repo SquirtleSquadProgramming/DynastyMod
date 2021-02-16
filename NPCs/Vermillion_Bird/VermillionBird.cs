@@ -47,7 +47,9 @@ namespace DynastyMod.NPCs.Vermillion_Bird
 		private enum Attack
         {
 			None,
-			Star
+			Star,
+			Tracking,
+			Sweep
         }
 		private Attack currentAttack = Attack.None;
 
@@ -65,41 +67,79 @@ namespace DynastyMod.NPCs.Vermillion_Bird
 
 			npc.velocity.X = (cooldown > 0) ? 0 : (targetPosition.X - (3*CM.X) - npc.position.X) / (2*CM.X);
 
-			timer--;
-			cooldown--;
+
+            timer--;
+            cooldown--;
             if (timer < 0)
             {
                 currentAttack = Attack.None;
-                timer = 3 * tickSpeed;
-                switch (WorldGen.genRand.Next(2))
+				int RandomTime = WorldGen.genRand.Next(5);
+                switch (WorldGen.genRand.Next(6) % 3)
                 {
                     case 0:
-						currentAttack = Attack.None;
-						cooldown = 0;
-						break;
-                    case 1:
+						timer = RandomTime + (3 * tickSpeed);
 						cooldown = (int)(1.5f * tickSpeed);
 						npc.velocity.X = 0;
-						currentAttack = Attack.Star;
+						currentAttack = Attack.Tracking;
+						break;
+                    case 1:
+						timer = RandomTime + (6 * tickSpeed);
+						cooldown = (int)(1.5f * tickSpeed);
+                        npc.velocity.X = 0;
+                        currentAttack = Attack.Star;
+                        break;
+					case 2:
+						cooldown = (int)(1.5f * tickSpeed);
+						timer = RandomTime + (10 * tickSpeed);
+						npc.velocity.X = 0;
+						currentAttack = Attack.Sweep;
+						SweepDirection = (WorldGen.genRand.Next(2) == 0) ? 1 : -1;
 						break;
                 }
             }
-			if (currentAttack == Attack.Star && cooldown % (0.25f * tickSpeed) == 0) StarAttack();
+            if (currentAttack == Attack.Star && cooldown % (0.25f * tickSpeed) == 0) StarAttack();
+			else if (currentAttack == Attack.Tracking && cooldown % (0.25f * tickSpeed) == 0) TrackingAttack();
+			else if (currentAttack == Attack.Sweep && cooldown % 2 == 0) SweepAttack();
 		}
+
+		private float SweepDirection = 1;
+		private void SweepAttack()
+		{
+			if (WorldGen.genRand.Next(15) == 0) return;
+			Vector2 direction = new Vector2(0f, 1f);
+			float speed = 4.5f;
+			Vector2 SpawnPosition = new Vector2(SweepDirection * npc.Center.X - (2 * cooldown * CM.X) - (45 * CM.X), npc.Center.Y - (20 * CM.Y));
+			Projectile.NewProjectile(SpawnPosition, direction * speed, ProjectileID.Fireball, 10, 0f, Main.myPlayer);
+        }
+
+		private void TrackingAttack()
+		{
+			if (cooldown == (int)(0.5f * tickSpeed) || cooldown == (int)(1f * tickSpeed))
+            {
+				TrackingProjectile(npc.Center);
+				TrackingProjectile(new Vector2(npc.Center.X + 10*CM.X, npc.Center.Y));
+				TrackingProjectile(new Vector2(npc.Center.X + 30 * CM.X, npc.Center.Y));
+				TrackingProjectile(new Vector2(npc.Center.X - 10*CM.X, npc.Center.Y));
+				TrackingProjectile(new Vector2(npc.Center.X - 30 * CM.X, npc.Center.Y));
+			}
+		}
+		private void TrackingProjectile(Vector2 SpawnPosition)
+        {
+			Vector2 targetPosition = Main.player[npc.target].Center;
+			Vector2 direction = targetPosition - SpawnPosition;
+			direction.Normalize();
+			float speed = 10f;
+			Projectile.NewProjectile(SpawnPosition, direction * speed, ProjectileID.Fireball, 10, 0f, Main.myPlayer);
+        }
 
 		private void StarAttack()
 		{ 
 			Vector2[] strDirections = new Vector2[] { new Vector2(0f, 10f), new Vector2(10f, 10f), new Vector2(10f, 0f), new Vector2(10f, -10f), new Vector2(0f, -10f), new Vector2(-10f, -10f), new Vector2(-10f, 0), new Vector2(-10f, 10f) };
 			Vector2[] diaDirections = new Vector2[] { new Vector2(5f, 10f), new Vector2(10f, 5f), new Vector2(10f, -5f), new Vector2(5f, -10f), new Vector2(-5f, -10f), new Vector2(-10f, -5f), new Vector2(-10f, 5f), new Vector2(-5f, 10f) };
-			Vector2 pos = new Vector2(npc.position.X + (5.25f * CM.X), npc.position.Y + (0 * CM.Y));
-			if (cooldown == (int)(1.25f * tickSpeed))
-				strDirections.ToList().ForEach(n => Projectile.NewProjectile(pos, n, ProjectileID.Fireball, 10, 0f));
-			else if (cooldown == (int)(1f * tickSpeed))
-				diaDirections.ToList().ForEach(n => Projectile.NewProjectile(pos, n, ProjectileID.Fireball, 10, 0f));
-			else if (cooldown == (int)(0.75f * tickSpeed))
-				strDirections.ToList().ForEach(n => Projectile.NewProjectile(pos, n, ProjectileID.Fireball, 10, 0f));
-			else if (cooldown == (int)(0.5f * tickSpeed))
-				diaDirections.ToList().ForEach(n => Projectile.NewProjectile(pos, n, ProjectileID.Fireball, 10, 0f));
+			if (cooldown == (int)(1.25f * tickSpeed) || cooldown == (int)(0.75f * tickSpeed))
+				strDirections.ToList().ForEach(n => Projectile.NewProjectile(npc.Center, n, ProjectileID.Fireball, 10, 0f));
+			else if (cooldown == (int)(1f * tickSpeed) || cooldown == (int)(0.5f * tickSpeed))
+				diaDirections.ToList().ForEach(n => Projectile.NewProjectile(npc.Center, n, ProjectileID.Fireball, 10, 0f));
 		}
 
 		int count = 0;
