@@ -20,7 +20,7 @@ namespace DynastyMod.Projectiles
 		{
 			projectile.width = 30;               
 			projectile.height = 30;              
-			projectile.aiStyle = 1;             //The ai style of the projectile, please reference the source code of Terraria
+			projectile.aiStyle = 1; //The ai style of the projectile, please reference the source code of Terraria
 			projectile.friendly = true;         
 			projectile.hostile = false;         
 			projectile.ranged = true;           
