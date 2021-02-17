@@ -5,6 +5,7 @@ using Terraria.Localization;
 using Microsoft.Xna.Framework;
 using System;
 using System.Linq;
+using System.IO;
 
 namespace DynastyMod.NPCs.Vermillion_Bird
 {
@@ -49,28 +50,50 @@ namespace DynastyMod.NPCs.Vermillion_Bird
 			None,
 			Star,
 			Tracking,
-			Sweep
+			SweepRight,
+			SweepLeft
         }
+		private short AttackToShort(Attack a) => (short)((a == Attack.None) ? 0 : (a == Attack.Star) ? 1 : (a == Attack.Tracking) ? 2 : (a == Attack.SweepRight) ? 3 : (a == Attack.SweepLeft) ? 4 : -1);
+		private Attack ShortToAttack(short a) =>   ((a == 0) ? Attack.None : (a == 1) ? Attack.Star : (a == 2) ? Attack.Tracking : (a == 3) ? Attack.SweepRight : (a == 4) ? Attack.SweepLeft : Attack.None);
 		private Attack currentAttack = Attack.None;
-		private int Phase = 1;
+		private short Phase = 1;
 
 		// Our AI here makes our NPC sit waiting for a player to enter range, jumps to attack, flutter mid-fall to stay afloat a little longer, then falls to the ground. Note that animation should happen in FindFrame
 		public override void AI()
 		{
-			Lighting.AddLight(npc.Center, Color.Orange.ToVector3() * 1f);
-			Lighting.AddLight(npc.Center, Color.Green.ToVector3() * 1f);
-			npc.TargetClosest(true);
-			Vector2 targetPosition = Main.player[npc.target].position;
-			if (targetPosition.Y < npc.Center.Y + (10 * CM.Y) && npc.velocity.Y > -4)
-				npc.velocity.Y -= DefaultAccelartion.Y; // accelerate up
-			if (targetPosition.Y > npc.Center.Y + (10 * CM.Y) && npc.velocity.Y < 4)
-				npc.velocity.Y += DefaultAccelartion.Y; // accelerate down
+			if (Main.netMode != NetmodeID.MultiplayerClient)
+			{
+				Lighting.AddLight(npc.Center, Color.Orange.ToVector3() * 1f);
+				Lighting.AddLight(npc.Center, Color.Green.ToVector3() * 1f);
+				npc.TargetClosest(true);
+				Vector2 targetPosition = Main.player[npc.target].position;
+				if (targetPosition.Y < npc.Center.Y + (10 * CM.Y) && npc.velocity.Y > -4)
+					npc.velocity.Y -= DefaultAccelartion.Y; // accelerate up
+				if (targetPosition.Y > npc.Center.Y + (10 * CM.Y) && npc.velocity.Y < 4)
+					npc.velocity.Y += DefaultAccelartion.Y; // accelerate down
 
-			Action[] Phases = new Action[] { Phase1, Phase2 };
-			Phases[Phase - 1]();
+				Action[] Phases = new Action[] { Phase1, Phase2 };
+				Phases[Phase - 1]();
+			}
 		}
 
-		private void Phase1()
+        public override void SendExtraAI(BinaryWriter writer)
+        {
+			writer.Write(timer);
+			writer.Write(cooldown);
+			writer.Write(AttackToShort(currentAttack));
+			writer.Write(Phase);
+		}
+
+		public override void ReceiveExtraAI(BinaryReader reader)
+        {
+			timer = reader.ReadInt32();
+			cooldown = reader.ReadInt32();
+			currentAttack = ShortToAttack(reader.ReadInt16());
+			Phase = reader.ReadInt16();
+        }
+
+        private void Phase1()
 		{
 			Vector2 targetPosition = Main.player[npc.target].position;
 			npc.velocity.X = (cooldown > 0) ? 0 : (targetPosition.X - npc.Center.X) / (2 * CM.X);
@@ -98,14 +121,13 @@ namespace DynastyMod.NPCs.Vermillion_Bird
 						cooldown = (int)(1.5f * tickSpeed);
 						timer = RandomTime + (5 * tickSpeed) + cooldown;
 						npc.velocity.X = 0;
-						currentAttack = Attack.Sweep;
-						SweepDirection = (WorldGen.genRand.Next(2) == 0) ? 1 : -1;
+						currentAttack = (WorldGen.genRand.Next(2) == 0) ? Attack.SweepRight : Attack.SweepLeft;
 						break;
 				}
 			}
 			if (currentAttack == Attack.Star && cooldown % (0.25f * tickSpeed) == 0) StarAttack();
 			else if (currentAttack == Attack.Tracking && cooldown % (0.25f * tickSpeed) == 0) TrackingAttack();
-			else if (currentAttack == Attack.Sweep && cooldown % 2 == 0) SweepAttack();
+			else if ((currentAttack == Attack.SweepRight || currentAttack == Attack.SweepLeft) && cooldown % 2 == 0) SweepAttack();
 		}
 
 		private void Phase2()
@@ -113,9 +135,9 @@ namespace DynastyMod.NPCs.Vermillion_Bird
 
         }
 
-		private float SweepDirection = 1;
 		private void SweepAttack()
 		{
+			float SweepDirection = (currentAttack == Attack.SweepLeft) ? 1 : -1;
 			int r = WorldGen.genRand.Next(30);
 			if (r == 0) return;
 			Vector2 direction = new Vector2(0f, 1f);
