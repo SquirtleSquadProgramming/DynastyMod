@@ -42,11 +42,14 @@ namespace DynastyMod.NPCs
 		{
 			return SpawnCondition.OverworldDay.Chance * 0.9f;
 		}*/
+		public Player lasthit;
+		public override void ModifyHitByItem(Player player,Item item,ref int damage,ref float knockback,ref bool crit) => lasthit = player;
+
 		public override void NPCLoot()
-		{
+        {
+			lasthit.AddBuff(BuffID.Cursed, 300, true);
 			Item.NewItem(npc.getRect(), (short)ModContent.ItemType<Items.RedEnvelope>());
 		}
-
 		public override bool StrikeNPC(ref double damage,int defense,ref float knockback,int hitDirection,ref bool crit)
 		{
 			mod.Logger.Info("Direction is " + hitDirection);
