@@ -32,9 +32,10 @@ namespace DynastyMod.Items.Weapons.Ranged
 			item.shootSpeed = 100f;
 			item.useAmmo = AmmoID.Arrow;
 		}
-        public override void OnHitNPC(Player player, NPC target, int damage, float knockBack, bool crit)
+		public override bool Shoot(Player player,ref Vector2 position,ref float speedX,ref float speedY,ref int type,ref int damage,ref float knockBack)
         {
-			target.AddBuff(BuffID.OnFire, 120);
-        }
+			Projectile.NewProjectile(position.X, position.Y, speedX, speedY, ModContent.ProjectileType<Projectiles.InvisableDebuffProjectile>(), damage, knockBack, player.whoAmI);
+			return true;
+		}
     }
 }
