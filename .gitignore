@@ -1,5 +1,4 @@
-obj
-obj/Debug/net45/DynastyMod.csprojAssemblyReference.cache
-*.cache
-obj/Debug/net45/DynastyMod.csprojAssemblyReference.cache
-.vs
+.vs/
+bin/
+obj/
+DynastyMod.csproj.user

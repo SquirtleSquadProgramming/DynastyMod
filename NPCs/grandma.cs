@@ -2,6 +2,8 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Localization;
+using Microsoft.Xna.Framework;
+using System;
 
 namespace DynastyMod.NPCs
 {
@@ -12,23 +14,28 @@ namespace DynastyMod.NPCs
         {
             DisplayName.SetDefault("Grandma");
             Main.npcFrameCount[npc.type] = Main.npcFrameCount[NPCID.Zombie];
-        }
+		}
+		
 		public override void SetDefaults()
 		{
+			
 			npc.width = 18;
 			npc.height = 40;
 			npc.damage = 0;
 			npc.defense = 6;
 			npc.lifeMax = 15;
-			npc.HitSound = SoundID.NPCHit1;
-			npc.DeathSound = SoundID.NPCDeath2;
+			npc.HitSound = SoundID.NPCHit2;
+			npc.DeathSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/grandma_death"); ;
 			npc.value = 60f;
 			npc.knockBackResist = 0.5f;
-			npc.aiStyle = 3;
-			aiType = NPCID.Zombie;
+			npc.aiStyle = -1;
+			//aiType = NPCID.Zombie;
 			animationType = NPCID.Zombie;
-			banner = Item.NPCtoBanner(NPCID.Zombie);
-			bannerItem = Item.BannerToItem(banner);
+			//banner = Item.NPCtoBanner(NPCID.Zombie);
+			//bannerItem = Item.BannerToItem(banner);
+			npc.spriteDirection = 1;
+			npc.velocity.X = 0.7f;
+			
 		}
 		//Grandma prob wont spawn random might be event npc
 		/*public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -38,6 +45,17 @@ namespace DynastyMod.NPCs
 		public override void NPCLoot()
 		{
 			Item.NewItem(npc.getRect(), (short)ModContent.ItemType<Items.RedEnvelope>());
+		}
+
+		public override bool StrikeNPC(ref double damage,int defense,ref float knockback,int hitDirection,ref bool crit)
+		{
+			mod.Logger.Info("Direction is " + hitDirection);
+			if (hitDirection == 1)
+				npc.velocity.X = 2f;
+			else if(hitDirection == -1)
+				npc.velocity.X = -2f;
+			npc.spriteDirection = hitDirection*1;
+			return true;
 		}
 	}
 }

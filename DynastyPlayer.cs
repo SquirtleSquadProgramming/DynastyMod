@@ -19,12 +19,14 @@ namespace DynastyMod
     public class DynastyPlayer : ModPlayer
     {
         public bool paperCrane;
+        public bool peachOfLongevity;
 
         private int[] flyingAIStyles = { 2, 14, 22, 17, 11, 4, 5 };
 
         public override void ResetEffects()
         {
             paperCrane = false;
+            peachOfLongevity = false;
         }
 
 
@@ -36,6 +38,15 @@ namespace DynastyMod
             if (flyingAIStyles.Contains(npc.aiStyle) && paperCrane)
             {
                 player.QuickSpawnItem(ItemID.CopperCoin, Convert.ToInt32(damage * 2));
+            }
+        }
+
+        public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
+        {
+            int r = WorldGen.genRand.Next(100);
+            if (target.type != NPCID.TargetDummy && r == 0)
+            {
+                player.QuickSpawnItem(ItemID.GoldCoin, WorldGen.genRand.Next(3));
             }
         }
     }
