@@ -32,12 +32,12 @@ namespace DynastyMod.NPCs
             npc.HitSound = SoundID.NPCHit44;
             npc.DeathSound = SoundID.Item110;
             aiType = -1;
-            npc.value = 300f;
+            npc.value = 650f;
         }
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo) => (Main.hardMode) ? SpawnCondition.OverworldNightMonster.Chance * 0.01f : 0.0f;
 
-        private const int AI_State_Slot = 0;
+        private int AI_State_Slot = 0;
 
         public float AI_State
         {
@@ -47,28 +47,39 @@ namespace DynastyMod.NPCs
 
         public override void AI()
         {
+            Vector2 velocityBias = new Vector2(WorldGen.genRand.NextFloat(1.0f) - 0.5f, WorldGen.genRand.NextFloat(1.0f) - 0.5f);
             Lighting.AddLight(new Vector2(npc.position.X - 0.5f, npc.position.Y), Color.Orange.ToVector3() * 2.0f);
             if (AI_State == 0)
             {
+                npc.alpha = 100;
                 npc.TargetClosest(true);
-                npc.velocity = new Vector2(0, 0); 
-
+                npc.velocity = velocityBias;
                 if (npc.HasValidTarget && Main.player[npc.target].Distance(npc.Center) < 1500f)
                     AI_State = 1;
             }
             else if (AI_State == 1)
             {
+                npc.alpha = 0;
                 npc.TargetClosest(true);
-                npc.velocity = new Vector2(npc.direction * 0.5f, (Main.player[npc.target].position.Y - npc.position.Y) * 0.02f);
-                if (npc.HasValidTarget && Main.player[npc.target].Distance(npc.Center) < 200f)
+                npc.velocity = new Vector2(npc.direction * 1f + velocityBias.X, (Main.player[npc.target].position.Y - npc.position.Y) * 0.02f + velocityBias.Y);
+                if (npc.HasValidTarget && Main.player[npc.target].Distance(npc.Center) < 300f)
+                {
                     AI_State = 2;
+                    Main.PlaySound(SoundID.NPCDeath40, npc.position);
+                }
                 else if (!npc.HasValidTarget || Main.player[npc.target].Distance(npc.Center) > 1500f)
                     AI_State = 0;
             }
             else if (AI_State == 2)
             {
                 npc.TargetClosest(true);
-                npc.velocity = new Vector2(npc.direction * 0.3f + (-npc.direction * 0.1f), (Main.player[npc.target].position.Y - npc.position.Y) * 0.04f);
+                Vector2 targetDifference = npc.position - Main.player[npc.target].position;
+
+                if (Math.Sqrt(Math.Pow(targetDifference.X, 2.0f) + Math.Pow(targetDifference.Y, 2.0f)) > 100f)
+                    npc.velocity = new Vector2(npc.direction * 3f + velocityBias.X, (Main.player[npc.target].position.Y - npc.position.Y + velocityBias.Y) * 0.05f);
+                else
+                    npc.velocity = new Vector2(npc.velocity.X * 1.05f + velocityBias.X, (Main.player[npc.target].position.Y - npc.position.Y + velocityBias.Y) * 0.05f);
+                
                 if (!npc.HasValidTarget || Main.player[npc.target].Distance(npc.Center) > 1500f)
                     AI_State = 0;
             }
