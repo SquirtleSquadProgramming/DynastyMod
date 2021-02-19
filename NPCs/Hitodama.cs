@@ -99,5 +99,11 @@ namespace DynastyMod.NPCs
         {
             Item.NewItem(npc.getRect(), (short)ModContent.ItemType<Items.SoulofSpite>());
         }
+
+
+        public override void OnHitPlayer(Player target, int damage, bool crit)
+        {
+            target.AddBuff(BuffID.Blackout, 1000);
+        }
     }  
 }
