@@ -15,7 +15,7 @@ namespace DynastyMod.NPCs
             DisplayName.SetDefault("Grandma");
             Main.npcFrameCount[npc.type] = Main.npcFrameCount[NPCID.Zombie];
 		}
-		
+		public int dir;
 		public override void SetDefaults()
 		{
 			
@@ -29,13 +29,14 @@ namespace DynastyMod.NPCs
 			npc.value = 60f;
 			npc.knockBackResist = 0.5f;
 			npc.aiStyle = -1;
-			//aiType = NPCID.Zombie;
+			//	aiType = NPCID.Zombie;
 			animationType = NPCID.Zombie;
 			//banner = Item.NPCtoBanner(NPCID.Zombie);
 			//bannerItem = Item.BannerToItem(banner);
-			npc.spriteDirection = 1;
-			npc.velocity.X = 0.7f;
-			
+			if (WorldGen.genRand.Next(2) == 0)
+				npc.spriteDirection = -1;
+			else
+				npc.spriteDirection = 1;
 		}
 		//Grandma prob wont spawn random might be event npc
 		/*public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -50,13 +51,59 @@ namespace DynastyMod.NPCs
 			lasthit.AddBuff(BuffID.Cursed, 300, true);
 			Item.NewItem(npc.getRect(), (short)ModContent.ItemType<Items.RedEnvelope>());
 		}
+		public dynamic lastX;
+		public int timer = 0;
+		public bool hit = false;
+		//For a wait
+		public int tickCounter = 0;
+		public int lastTick;
+		public int t = 0;
+		public override void AI()
+        {
+			if (t > 9)
+			{
+				npc.spriteDirection = npc.spriteDirection * -1;
+				t = 0;
+			}
+			//mod.Logger.Info("This is an informational log	" + t + "		" + npc.position.X/16);
+			tickCounter++;
+			if (!hit)
+			{
+				npc.velocity.X = 0.7f* npc.spriteDirection;
+			}
+			if (npc.position.X == lastX && timer != 3)
+			{
+				npc.velocity = new Vector2(npc.direction * 1, -4f);
+				npc.velocity.X = 2f;
+				timer++;
+				lastTick = tickCounter;
+				t++;
+				mod.Logger.Info("Grandam Jump	" + t);
+			}
+            /*if (npc.position.X != lastX)
+            {
+				t = 0;
+				mod.Logger.Info("Grandam Walk	" + npc.position.X + "	" + lastX);
+			}*/
+
+
+			if (timer == 3)
+			{
+				//lastX = 0;
+				if (lastTick + 60 == tickCounter)
+				{
+					timer = lastTick = tickCounter = 0;
+				}	
+			}
+			else
+				lastX = npc.position.X;
+			
+
+		}
 		public override bool StrikeNPC(ref double damage,int defense,ref float knockback,int hitDirection,ref bool crit)
 		{
-			mod.Logger.Info("Direction is " + hitDirection);
-			if (hitDirection == 1)
-				npc.velocity.X = 2f;
-			else if(hitDirection == -1)
-				npc.velocity.X = -2f;
+			npc.velocity.X = 2f*hitDirection;
+			hit = true;
 			npc.spriteDirection = hitDirection*1;
 			return true;
 		}
