@@ -4,6 +4,8 @@ using Terraria;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using IL.Terraria.Audio;
+using Terraria.Audio;
 
 namespace DynastyMod.Projectiles
 {
@@ -12,106 +14,108 @@ namespace DynastyMod.Projectiles
 		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Bohiya Arrow");
-			ProjectileID.Sets.TrailCacheLength[projectile.type] = 5;    
-			ProjectileID.Sets.TrailingMode[projectile.type] = 0;        
+			ProjectileID.Sets.TrailCacheLength[Projectile.type] = 5;    
+			ProjectileID.Sets.TrailingMode[Projectile.type] = 0;        
 		}
 
 		public override void SetDefaults()
 		{
-			projectile.width = 22;
-			projectile.height = 40;
-			projectile.friendly = true;
-			projectile.penetrate = 1;
-			projectile.light = 0.8f;
-			projectile.arrow = true;
-			projectile.scale = 0.9f;
-			projectile.aiStyle = 1;
+			Projectile.width = 22;
+			Projectile.height = 40;
+			Projectile.friendly = true;
+			Projectile.penetrate = 1;
+			Projectile.light = 0.8f;
+			Projectile.arrow = true;
+			Projectile.scale = 0.9f;
+			Projectile.aiStyle = 1;
 		}
 
 		public override void AI()
 		{
-			if (projectile.owner == Main.myPlayer && projectile.timeLeft <= 3)
+			if (Projectile.owner == Main.myPlayer && Projectile.timeLeft <= 3)
 			{
-				projectile.tileCollide = false;
-				projectile.alpha = 255;
-				projectile.position = projectile.Center;
-				projectile.width = 250;
-				projectile.height = 250;
-				projectile.Center = projectile.position;
-				projectile.damage = 250;
-				projectile.knockBack = 10f;
+				Projectile.tileCollide = false;
+				Projectile.alpha = 255;
+				Projectile.position = Projectile.Center;
+				Projectile.width = 250;
+				Projectile.height = 250;
+				Projectile.Center = Projectile.position;
+				Projectile.damage = 250;
+				Projectile.knockBack = 10f;
 			}
 			else
 			{
 				if (Main.rand.NextBool())
 				{
-					int dustIndex = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, 31, 0f, 0f, 100, default(Color), 1f);
+					int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, 31, 0f, 0f, 100, default(Color), 1f);
 					Main.dust[dustIndex].scale = 0.1f + (float)Main.rand.Next(5) * 0.1f;
 					Main.dust[dustIndex].fadeIn = 1.5f + (float)Main.rand.Next(5) * 0.1f;
 					Main.dust[dustIndex].noGravity = true;
-					Main.dust[dustIndex].position = projectile.Center + new Vector2(0f, (float)(-(float)projectile.height / 2)).RotatedBy((double)projectile.rotation, default(Vector2)) * 1.1f;
-					dustIndex = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, 6, 0f, 0f, 100, default(Color), 1f);
+					Main.dust[dustIndex].position = Projectile.Center + new Vector2(0f, (float)(-(float)Projectile.height / 2)).RotatedBy((double)Projectile.rotation, default(Vector2)) * 1.1f;
+					dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, 6, 0f, 0f, 100, default(Color), 1f);
 					Main.dust[dustIndex].scale = 1f + (float)Main.rand.Next(5) * 0.1f;
 					Main.dust[dustIndex].noGravity = true;
-					Main.dust[dustIndex].position = projectile.Center + new Vector2(0f, (float)(-(float)projectile.height / 2 - 6)).RotatedBy((double)projectile.rotation, default(Vector2)) * 1.1f;
+					Main.dust[dustIndex].position = Projectile.Center + new Vector2(0f, (float)(-(float)Projectile.height / 2 - 6)).RotatedBy((double)Projectile.rotation, default(Vector2)) * 1.1f;
 				}
 			}
-			/*projectile.rotation = projectile.velocity.ToRotation() + MathHelper.ToRadians(90f);
-			projectile.velocity.Y += 0.2f;*/
+			/*Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.ToRadians(90f);
+			Projectile.velocity.Y += 0.2f;*/
 			return;
 		}
 
 		public override void Kill(int timeLeft)
 		{
-		    Main.PlaySound(SoundID.Item14, projectile.position);
+		    Terraria.Audio.SoundEngine.PlaySound(SoundID.Item14, Projectile.position);
 			for (int i = 0; i < 50; i++)
 			{
-				int dustIndex = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, 31, 0f, 0f, 100, default(Color), 2f);
+				int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, 31, 0f, 0f, 100, default(Color), 2f);
 				Main.dust[dustIndex].velocity *= 1.4f;
 			}
 			// Fire Dust spawn
 			for (int i = 0; i < 80; i++)
 			{
-				int dustIndex = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, 6, 0f, 0f, 100, default(Color), 3f);
+				int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, 6, 0f, 0f, 100, default(Color), 3f);
 				Main.dust[dustIndex].noGravity = true;
 				Main.dust[dustIndex].velocity *= 3f;
-				dustIndex = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, 6, 0f, 0f, 100, default(Color), 2f);
+				dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, 6, 0f, 0f, 100, default(Color), 2f);
 				Main.dust[dustIndex].velocity *= 2f;
 			}
-			// Large Smoke Gore spawn
-			for (int g = 0; g < 2; g++)
+            // Large Smoke Gore spawn
+            //All of this doesnt work now
+            for (int g = 0; g < 2; g++)
 			{
-				int goreIndex = Gore.NewGore(new Vector2(projectile.position.X + (float)(projectile.width / 2) - 24f, projectile.position.Y + (float)(projectile.height / 2) - 24f), default(Vector2), Main.rand.Next(61, 64), 1f);
+				
+				/*int goreIndex = Gore.NewGore(new Vector2(Projectile.position.X + (float)(Projectile.width / 2) - 24f, Projectile.position.Y + (float)(Projectile.height / 2) - 24f), default(Vector2), Main.rand.Next(61, 64), 1f);
 				Main.gore[goreIndex].scale = 1.5f;
 				Main.gore[goreIndex].velocity.X = Main.gore[goreIndex].velocity.X + 1.5f;
 				Main.gore[goreIndex].velocity.Y = Main.gore[goreIndex].velocity.Y + 1.5f;
-				goreIndex = Gore.NewGore(new Vector2(projectile.position.X + (float)(projectile.width / 2) - 24f, projectile.position.Y + (float)(projectile.height / 2) - 24f), default(Vector2), Main.rand.Next(61, 64), 1f);
+				goreIndex = Gore.NewGore(new Vector2(Projectile.position.X + (float)(Projectile.width / 2) - 24f, Projectile.position.Y + (float)(Projectile.height / 2) - 24f), default(Vector2), Main.rand.Next(61, 64), 1f);
 				Main.gore[goreIndex].scale = 1.5f;
 				Main.gore[goreIndex].velocity.X = Main.gore[goreIndex].velocity.X - 1.5f;
 				Main.gore[goreIndex].velocity.Y = Main.gore[goreIndex].velocity.Y + 1.5f;
-				goreIndex = Gore.NewGore(new Vector2(projectile.position.X + (float)(projectile.width / 2) - 24f, projectile.position.Y + (float)(projectile.height / 2) - 24f), default(Vector2), Main.rand.Next(61, 64), 1f);
+				goreIndex = Gore.NewGore(new Vector2(Projectile.position.X + (float)(Projectile.width / 2) - 24f, Projectile.position.Y + (float)(Projectile.height / 2) - 24f), default(Vector2), Main.rand.Next(61, 64), 1f);
 				Main.gore[goreIndex].scale = 1.5f;
 				Main.gore[goreIndex].velocity.X = Main.gore[goreIndex].velocity.X + 1.5f;
 				Main.gore[goreIndex].velocity.Y = Main.gore[goreIndex].velocity.Y - 1.5f;
-				goreIndex = Gore.NewGore(new Vector2(projectile.position.X + (float)(projectile.width / 2) - 24f, projectile.position.Y + (float)(projectile.height / 2) - 24f), default(Vector2), Main.rand.Next(61, 64), 1f);
+				goreIndex = Gore.NewGore(new Vector2(Projectile.position.X + (float)(Projectile.width / 2) - 24f, Projectile.position.Y + (float)(Projectile.height / 2) - 24f), default(Vector2), Main.rand.Next(61, 64), 1f);
 				Main.gore[goreIndex].scale = 1.5f;
 				Main.gore[goreIndex].velocity.X = Main.gore[goreIndex].velocity.X - 1.5f;
-				Main.gore[goreIndex].velocity.Y = Main.gore[goreIndex].velocity.Y - 1.5f;
+				Main.gore[goreIndex].velocity.Y = Main.gore[goreIndex].velocity.Y - 1.5f;*/
 			}
 
-			projectile.position.X = projectile.position.X + (float)(projectile.width / 2);
-			projectile.position.Y = projectile.position.Y + (float)(projectile.height / 2);
-			projectile.width = 22;
-			projectile.height = 40;
-			projectile.position.X = projectile.position.X - (float)(projectile.width / 2);
-			projectile.position.Y = projectile.position.Y - (float)(projectile.height / 2);
+			Projectile.position.X = Projectile.position.X + (float)(Projectile.width / 2);
+			Projectile.position.Y = Projectile.position.Y + (float)(Projectile.height / 2);
+			Projectile.width = 22;
+			Projectile.height = 40;
+			Projectile.position.X = Projectile.position.X - (float)(Projectile.width / 2);
+			Projectile.position.Y = Projectile.position.Y - (float)(Projectile.height / 2);
 
 			//Explosive Size
-			projectile.Size = new Vector2(100);
-			projectile.Damage();
-			projectile.position = projectile.Center;
-			projectile.Size = new Vector2(10);
-			projectile.Center = projectile.position;
+			Projectile.Size = new Vector2(100);
+			Projectile.Damage();
+			Projectile.position = Projectile.Center;
+			Projectile.Size = new Vector2(10);
+			Projectile.Center = Projectile.position;
 
 		}
 	}

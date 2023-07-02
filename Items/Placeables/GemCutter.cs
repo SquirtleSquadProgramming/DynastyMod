@@ -14,18 +14,18 @@ namespace DynastyMod.Items.Placeables
 
         public override void SetDefaults()
         {
-            item.width = 32;
-            item.height = 32;
-            item.value = Item.sellPrice(silver: 2);
-            item.rare = ItemRarityID.LightRed;
-            item.useStyle = ItemUseStyleID.SwingThrow;
-            item.useTurn = true;
-            item.useAnimation = 15;
-            item.useTime = 10;
-            item.autoReuse = true;
-            item.maxStack = 99;
-            item.consumable = true;
-            item.createTile = ModContent.TileType<Tiles.GemCutter>();
+            Item.width = 32;
+            Item.height = 32;
+            Item.value = Item.sellPrice(silver: 2);
+            Item.rare = ItemRarityID.LightRed;
+            //Item.useStyle = ItemUseStyleID.SwingThrow;
+            Item.useTurn = true;
+            Item.useAnimation = 15;
+            Item.useTime = 10;
+            Item.autoReuse = true;
+            Item.maxStack = 99;
+            Item.consumable = true;
+            Item.createTile = ModContent.TileType<Tiles.GemCutter>();
         }
 
         

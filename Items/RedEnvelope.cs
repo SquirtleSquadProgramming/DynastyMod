@@ -18,15 +18,17 @@ namespace DynastyMod.Items
 		public override void SetDefaults()
 		{
 			//Resize this depending on sprite size *Note bullet sprite is not shot only used as the inv item
-			item.width = 10;
-			item.height = 10;
-			item.maxStack = 100;
-			item.consumable = true;
-			item.value = 10;
-			item.rare = ItemRarityID.Blue;
+			Item.width = 10;
+			Item.height = 10;
+			Item.maxStack = 100;
+			Item.consumable = true;
+			Item.value = 10;
+			Item.rare = ItemRarityID.Blue;
 		}
 		public override bool CanRightClick() => true;
-		public override void RightClick(Player player) => player.QuickSpawnItem(ItemID.GoldCoin,  WorldGen.genRand.Next(5)+5);
+
+		//QuickSpawnItem takes diff args now
+		//public override void RightClick(Player player) => player.QuickSpawnItem(ItemID.GoldCoin,  WorldGen.genRand.Next(5)+5);
 		
 	}
 }

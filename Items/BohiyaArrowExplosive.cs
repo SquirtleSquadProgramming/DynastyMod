@@ -11,24 +11,25 @@ namespace DynastyMod.Items
 		{
 			base.SetStaticDefaults();
 			DisplayName.SetDefault("Explosive Arrow");
-			ItemID.Sets.ItemsThatCountAsBombsForDemolitionistToSpawn[item.type] = true;
+			ItemID.Sets.ItemsThatCountAsBombsForDemolitionistToSpawn[Item.type] = true;
 		}
 
 		public override void SetDefaults()
 		{
-			item.damage = 12;
-			item.ranged = true;
+			Item.damage = 12;
+			//This is not how it works anymore
+			//Item.ranged = true;
 			//Resize this depending on sprite size 
-			item.width = 8;
-			item.height = 8;
-			item.maxStack = 100;
-			item.consumable = true;             
-			item.knockBack = 1.5f;
-			item.value = 10;
-			item.rare = ItemRarityID.Blue;
-			item.shoot = ModContent.ProjectileType<Projectiles.BohiyaArrowExplosive>();   
-			item.shootSpeed = 1f;                  
-			item.ammo = 40;              
+			Item.width = 8;
+			Item.height = 8;
+			Item.maxStack = 100;
+			Item.consumable = true;             
+			Item.knockBack = 1.5f;
+			Item.value = 10;
+			Item.rare = ItemRarityID.Blue;
+			Item.shoot = ModContent.ProjectileType<Projectiles.BohiyaArrowExplosive>();   
+			Item.shootSpeed = 1f;                  
+			Item.ammo = 40;              
 		}
 		//Change This later
 		/*public override void AddRecipes()

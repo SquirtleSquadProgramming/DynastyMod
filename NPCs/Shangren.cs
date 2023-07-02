@@ -15,38 +15,38 @@ namespace DynastyMod.NPCs
             get { return "DynastyMod/NPCs/Shangren"; }
         }
 
-        public override bool Autoload(ref string name)
+        /*public override bool Autoload(ref string name)
         {
             name = "Shangren";
             return mod.Properties.Autoload;
-        }
+        }*/
 
         public override void SetStaticDefaults()
         {
-            Main.npcFrameCount[npc.type] = 26;
-            NPCID.Sets.ExtraFramesCount[npc.type] = 9;
-            NPCID.Sets.AttackFrameCount[npc.type] = 5;
-            NPCID.Sets.DangerDetectRange[npc.type] = 700;
-            NPCID.Sets.AttackType[npc.type] = 0; // TBE
-            NPCID.Sets.AttackTime[npc.type] = 90; // TBE
-            NPCID.Sets.AttackAverageChance[npc.type] = 30;
-            NPCID.Sets.HatOffsetY[npc.type] = 4;
+            Main.npcFrameCount[NPC.type] = 26;
+            NPCID.Sets.ExtraFramesCount[NPC.type] = 9;
+            NPCID.Sets.AttackFrameCount[NPC.type] = 5;
+            NPCID.Sets.DangerDetectRange[NPC.type] = 700;
+            NPCID.Sets.AttackType[NPC.type] = 0; // TBE
+            NPCID.Sets.AttackTime[NPC.type] = 90; // TBE
+            NPCID.Sets.AttackAverageChance[NPC.type] = 30;
+            NPCID.Sets.HatOffsetY[NPC.type] = 4;
         }
 
         public override void SetDefaults()
         {
-            npc.townNPC = true;
-            npc.friendly = true;
-            npc.width = 18;
-            npc.height = 40;
-            npc.aiStyle = 7;
-            npc.damage = 12;
-            npc.defense = 17;
-            npc.lifeMax = 250;
-            npc.HitSound = SoundID.NPCHit1;
-            npc.DeathSound = SoundID.NPCDeath1;
-            npc.knockBackResist = 0.5f;
-            animationType = NPCID.Guide;
+            NPC.townNPC = true;
+            NPC.friendly = true;
+            NPC.width = 18;
+            NPC.height = 40;
+            NPC.aiStyle = 7;
+            NPC.damage = 12;
+            NPC.defense = 17;
+            NPC.lifeMax = 250;
+            NPC.HitSound = SoundID.NPCHit1;
+            NPC.DeathSound = SoundID.NPCDeath1;
+            NPC.knockBackResist = 0.5f;
+            AnimationType = NPCID.Guide;
         }
 
         //public override bool CanTownNPCSpawn(int numTownNPCs, int money)
@@ -64,10 +64,10 @@ namespace DynastyMod.NPCs
         //    return false;
         //}
 
-        public override string TownNPCName()
+        /*public override string TownNPCName()
         {
             return PotenialNPCNames[WorldGen.genRand.Next(PotenialNPCNames.Length)];
-        }
+        }*/
 
         // TBE
         public override string GetChat()
@@ -92,7 +92,7 @@ namespace DynastyMod.NPCs
         public override void SetupShop(Chest shop, ref int slot)
         {
             //(ID,  vanilla), price
-            (short, int)[] ShopItems = new (short, int)[] { (ItemID.DynastyWood, 50), (ItemID.RedDynastyShingles, 50), (ItemID.BlueDynastyShingles, 50), ((short)mod.ItemType("BlankScroll"), 10000) };
+            (short, int)[] ShopItems = new (short, int)[] { (ItemID.DynastyWood, 50), (ItemID.RedDynastyShingles, 50), (ItemID.BlueDynastyShingles, 50), ((short)ModContent.ItemType<Items.BlankScroll>(), 10000) };
 
             foreach ((short, int) item in ShopItems)
             {
@@ -101,11 +101,11 @@ namespace DynastyMod.NPCs
                 slot++;
             }
         }
-
-        public override void NPCLoot()
+        /*
+        public override void ModifyNPCLoot()
         {
-            Item.NewItem(npc.getRect(), 2);
-        }
+            Item.NewItem(NPC.getRect(), 2);
+        }*/
 
         public override void TownNPCAttackStrength(ref int damage, ref float knockback)
         {

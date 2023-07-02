@@ -15,29 +15,29 @@ namespace DynastyMod.NPCs.Vermillion_Bird
 		public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Vermillion Bird");
-            Main.npcFrameCount[npc.type] = 3;
+            Main.npcFrameCount[NPC.type] = 3;
         }
 
 		public override void SetDefaults()
 		{
-			npc.aiStyle = -1;
-			npc.lifeMax = 2000;
-			npc.damage = 100;
-			npc.defense = 55;
-			npc.knockBackResist = 0f;
-			npc.width = 100;
-			npc.height = 110;
-			npc.scale = 1.5f;
-			npc.value = Item.buyPrice(0, 20, 0, 0);
-			npc.npcSlots = 15f;
-			npc.boss = true;
-			npc.lavaImmune = true;
-			npc.noGravity = true;
-			npc.noTileCollide = true;
-			npc.HitSound = SoundID.NPCHit1;
-			npc.DeathSound = SoundID.NPCDeath1;
-			npc.buffImmune[24] = true;
-			music = MusicID.Boss2;
+			NPC.aiStyle = -1;
+			NPC.lifeMax = 2000;
+			NPC.damage = 100;
+			NPC.defense = 55;
+			NPC.knockBackResist = 0f;
+			NPC.width = 100;
+			NPC.height = 110;
+			NPC.scale = 1.5f;
+			NPC.value = Item.buyPrice(0, 20, 0, 0);
+			NPC.npcSlots = 15f;
+			NPC.boss = true;
+			NPC.lavaImmune = true;
+			NPC.noGravity = true;
+			NPC.noTileCollide = true;
+			NPC.HitSound = SoundID.NPCHit1;
+			NPC.DeathSound = SoundID.NPCDeath1;
+			NPC.buffImmune[24] = true;
+			Music = MusicID.Boss2;
 		}
 
 		private Vector2 DefaultAcceleration = new Vector2(0.12f, 0.7f); // Default acceleration max
@@ -66,14 +66,14 @@ namespace DynastyMod.NPCs.Vermillion_Bird
 		{
 			if (Main.netMode != NetmodeID.MultiplayerClient) // If the code is not being run on multiplayer clients (and is on the server or singleplayer clients)
 			{
-				Lighting.AddLight(npc.Center, Color.Orange.ToVector3() * 1f); // Add Orange Lighting
-				Lighting.AddLight(npc.Center, Color.Green.ToVector3() * 1f);  // Add Green  Lighting
-				npc.TargetClosest(true); // Set the npc to target the closest
-				Vector2 targetPosition = Main.player[npc.target].position; // Get the player co-ordinates
-				if (targetPosition.Y < npc.Center.Y + (10 * CM.Y) && npc.velocity.Y > -4) // If the boss centre is less than 10 tiles above the player and the acceleration is less than -4
-					npc.velocity.Y -= DefaultAcceleration.Y; // Increase the cumulative upwards acceleration
-				if (targetPosition.Y > npc.Center.Y + (10 * CM.Y) && npc.velocity.Y < 4) // If the boss centre is greater than 10 tiles above the player and the acceleration is less than 4
-					npc.velocity.Y += DefaultAcceleration.Y; // Increase the cumulative downwards acceleration
+				Lighting.AddLight(NPC.Center, Color.Orange.ToVector3() * 1f); // Add Orange Lighting
+				Lighting.AddLight(NPC.Center, Color.Green.ToVector3() * 1f);  // Add Green  Lighting
+				NPC.TargetClosest(true); // Set the npc to target the closest
+				Vector2 targetPosition = Main.player[NPC.target].position; // Get the player co-ordinates
+				if (targetPosition.Y < NPC.Center.Y + (10 * CM.Y) && NPC.velocity.Y > -4) // If the boss centre is less than 10 tiles above the player and the acceleration is less than -4
+					NPC.velocity.Y -= DefaultAcceleration.Y; // Increase the cumulative upwards acceleration
+				if (targetPosition.Y > NPC.Center.Y + (10 * CM.Y) && NPC.velocity.Y < 4) // If the boss centre is greater than 10 tiles above the player and the acceleration is less than 4
+					NPC.velocity.Y += DefaultAcceleration.Y; // Increase the cumulative downwards acceleration
 
 				Action[] Phases = new Action[] { Phase1, Phase2 }; // Array for the different phase functions
 				Phases[Phase - 1](); // Run the function
@@ -86,8 +86,8 @@ namespace DynastyMod.NPCs.Vermillion_Bird
 		/// </summary>
         private void Phase1()
 		{
-			Vector2 targetPosition = Main.player[npc.target].position; // Get the position of the closest target/player
-			npc.velocity.X = (cooldown > 0) ? 0 : (targetPosition.X - npc.Center.X) / (2 * CM.X); // if the cool down is not complete make the boss have no velocity, else determine it from player position
+			Vector2 targetPosition = Main.player[NPC.target].position; // Get the position of the closest target/player
+			NPC.velocity.X = (cooldown > 0) ? 0 : (targetPosition.X - NPC.Center.X) / (2 * CM.X); // if the cool down is not complete make the boss have no velocity, else determine it from player position
 			timer--; // reduce timer by 1
 			cooldown--; // reduce cooldown by 1
 			if (timer < 0) // if the timer has finished
@@ -99,19 +99,19 @@ namespace DynastyMod.NPCs.Vermillion_Bird
 					case 0: // Tracking Attack
 						cooldown = (int)(1.5f * tickSpeed); // set the cooldown to 1.5 seconds
 						timer = RandomTime + (1 * tickSpeed) + cooldown; // set the time to a random time plus the cooldown
-						npc.velocity.X = 0; // no velocity
+						NPC.velocity.X = 0; // no velocity
 						currentAttack = Attack.Tracking; // set the attack to tracking
 						break;
 					case 1: // Star Attack
 						cooldown = (int)(1.5f * tickSpeed); // *
 						timer = RandomTime + (4 * tickSpeed) + cooldown; // *
-						npc.velocity.X = 0; // *
+						NPC.velocity.X = 0; // *
 						currentAttack = Attack.Star; // set the attack to star
 						break;
 					case 2: // Sweep/hellfire Attack
 						cooldown = (int)(1.5f * tickSpeed); // *
 						timer = RandomTime + (5 * tickSpeed) + cooldown; // *
-						npc.velocity.X = 0; // *
+						NPC.velocity.X = 0; // *
 						currentAttack = (WorldGen.genRand.Next(2) == 0) ? Attack.SweepRight : Attack.SweepLeft; // if the random number is 0 set the attack to sweep right else set it to sweep left
 						break;
 				}
@@ -132,8 +132,9 @@ namespace DynastyMod.NPCs.Vermillion_Bird
 			Vector2 direction = new Vector2(0f, 1f); // set the direction to down
 			float speed = 4.5f; // set the speed to 4.5 (for readability)
 			// TODO: FIX SPAWNPOSITION
-			Vector2 SpawnPosition = new Vector2((npc.Center.X - (SweepDirection * cooldown * CM.X) - (45 * CM.X)), npc.Center.Y - (-r + 20 * CM.Y)); // calculate the spawn position WIP
-			Projectile.NewProjectile(SpawnPosition, direction * speed, ProjectileID.Fireball, 10, 0f, Main.myPlayer); // Summon a projectile
+			Vector2 SpawnPosition = new Vector2((NPC.Center.X - (SweepDirection * cooldown * CM.X) - (45 * CM.X)), NPC.Center.Y - (-r + 20 * CM.Y)); // calculate the spawn position WIP
+			//They Changed the Function it takes differnt arguments
+			//Projectile.NewProjectile(SpawnPosition, direction * speed, ProjectileID.Fireball, 10, 0f, Main.myPlayer); // Summon a projectile
         }
 
 		/// <summary>
@@ -144,11 +145,11 @@ namespace DynastyMod.NPCs.Vermillion_Bird
 			// if the cooldown is at ~0.5 seconds or 1 second exactly run the attacks (this causes it to attack once per time)
 			if (cooldown == (int)(0.5f * tickSpeed) || cooldown == (int)(1f * tickSpeed))
             {
-				TrackingProjectile(npc.Center); // Summon the trackin projectile at the npc center
-				TrackingProjectile(new Vector2(npc.Center.X + 10*CM.X, npc.Center.Y)); // Summon 10 tiles to the left
-				TrackingProjectile(new Vector2(npc.Center.X + 30 * CM.X, npc.Center.Y)); //  "   30   "     "     "
-				TrackingProjectile(new Vector2(npc.Center.X - 10*CM.X, npc.Center.Y)); // Summon 10 tiles to the right
-				TrackingProjectile(new Vector2(npc.Center.X - 30 * CM.X, npc.Center.Y)); //  "   30   "     "     "
+				TrackingProjectile(NPC.Center); // Summon the trackin projectile at the npc center
+				TrackingProjectile(new Vector2(NPC.Center.X + 10*CM.X, NPC.Center.Y)); // Summon 10 tiles to the left
+				TrackingProjectile(new Vector2(NPC.Center.X + 30 * CM.X, NPC.Center.Y)); //  "   30   "     "     "
+				TrackingProjectile(new Vector2(NPC.Center.X - 10*CM.X, NPC.Center.Y)); // Summon 10 tiles to the right
+				TrackingProjectile(new Vector2(NPC.Center.X - 30 * CM.X, NPC.Center.Y)); //  "   30   "     "     "
 			}
 		}
 
@@ -158,18 +159,19 @@ namespace DynastyMod.NPCs.Vermillion_Bird
 		/// <param name="SpawnPosition">Where to shoot the projective from</param>
 		private void TrackingProjectile(Vector2 SpawnPosition)
         {
-			Vector2 targetPosition = Main.player[npc.target].Center; // Target the centre of the player
+			Vector2 targetPosition = Main.player[NPC.target].Center; // Target the centre of the player
 			Vector2 direction = targetPosition - SpawnPosition; // Calculate the direction of the projectile
 			direction.Normalize(); // Changes direction to be within ¯1 < x < 1 (same for y)
 			float speed = 10f; // Variable speed for readability
-			Projectile.NewProjectile( // Summon the projectile
+			//They Changed the function it doesnt take these args anymore
+			/*Projectile.NewProjectile( // Summon the projectile
 				SpawnPosition, // At the spawn position
 				direction * speed, // In the direction of the target at the specified speed
 				ProjectileID.Fireball, // Summons the fireball projectile
 				Damage, // With a damage of 10
 				0f, // With 0 knockback
 				Main.myPlayer // With owner of the player so all projectiles will deal damage
-			);
+			);*/
         }
 
 		/// <summary>
@@ -182,10 +184,12 @@ namespace DynastyMod.NPCs.Vermillion_Bird
 			Vector2[] strDirections = new Vector2[] { new Vector2(0f, 10f), new Vector2(10f, 10f), new Vector2(10f, 0f), new Vector2(10f, -10f), new Vector2(0f, -10f), new Vector2(-10f, -10f), new Vector2(-10f, 0), new Vector2(-10f, 10f) };
 			// Diagonal directions
 			Vector2[] diaDirections = new Vector2[] { new Vector2(5f, 10f), new Vector2(10f, 5f), new Vector2(10f, -5f), new Vector2(5f, -10f), new Vector2(-5f, -10f), new Vector2(-10f, -5f), new Vector2(-10f, 5f), new Vector2(-5f, 10f) };
-			if (cooldown == (int)(1.25f * tickSpeed) || cooldown == (int)(0.75f * tickSpeed)) // if the cooldown is either ~1.25 seconds or ~0.75 seconds...
-				strDirections.ToList().ForEach(n => Projectile.NewProjectile(npc.Center, n, ProjectileID.Fireball, Damage, 0f)); // ... iterate through the directions and summon the projectiles that way
+			//They Changed These Functions as well anything projectile doesnt take arguments 
+			/*if (cooldown == (int)(1.25f * tickSpeed) || cooldown == (int)(0.75f * tickSpeed)) // if the cooldown is either ~1.25 seconds or ~0.75 seconds...
+				strDirections.ToList().ForEach(n => Projectile.NewProjectile(NPC.Center, n, ProjectileID.Fireball, Damage, 0f)); // ... iterate through the directions and summon the projectiles that way
 			else if (cooldown == (int)(1f * tickSpeed) || cooldown == (int)(0.5f * tickSpeed)) // if the cooldown is either ~1 second or ~0.5 seconds...
-				diaDirections.ToList().ForEach(n => Projectile.NewProjectile(npc.Center, n, ProjectileID.Fireball, Damage, 0f)); // ... iterate through the directions and summon the projectiles that way
+				diaDirections.ToList().ForEach(n => Projectile.NewProjectile(NPC.Center, n, ProjectileID.Fireball, Damage, 0f)); // ... iterate through the directions and summon the projectiles that way
+			*/
 		}
         #endregion
 
@@ -203,10 +207,10 @@ namespace DynastyMod.NPCs.Vermillion_Bird
 		/// <param name="frameHeight">How tall the frames are</param>
         public override void FindFrame(int frameHeight)
         {
-            npc.spriteDirection = -npc.direction; // Set the sprite direction to the reverse of the direction of the npc
-            count = ((int)npc.frameCounter == 8) ? 1 : (int)npc.frameCounter / 4; // if the framecounter is 8 return 1 else return the quotient of framecounter and 4
-            npc.frame.Y = count * frameHeight; // set the frame y to count × height
-			npc.frameCounter = (npc.frameCounter == 12) ? 0 : npc.frameCounter + 1; // if the frame counter is 12 else increase it by 1
+            NPC.spriteDirection = -NPC.direction; // Set the sprite direction to the reverse of the direction of the npc
+            count = ((int)NPC.frameCounter == 8) ? 1 : (int)NPC.frameCounter / 4; // if the framecounter is 8 return 1 else return the quotient of framecounter and 4
+            NPC.frame.Y = count * frameHeight; // set the frame y to count × height
+			NPC.frameCounter = (NPC.frameCounter == 12) ? 0 : NPC.frameCounter + 1; // if the frame counter is 12 else increase it by 1
 		}
     }
 }

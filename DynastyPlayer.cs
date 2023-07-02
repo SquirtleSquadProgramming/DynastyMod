@@ -37,7 +37,10 @@ namespace DynastyMod
 
             if (flyingAIStyles.Contains(npc.aiStyle) && paperCrane)
             {
-                player.QuickSpawnItem(ItemID.CopperCoin, Convert.ToInt32(damage * 2));
+                //Old Way
+                //Player.QuickSpawnItem(ItemID.CopperCoin, Convert.ToInt32(damage * 2));
+                //This is new Way IDK if this works how we want it to. - Nathan 2023
+                Player.QuickSpawnItem(npc.GetSource_FromThis(), ItemID.GoldCoin, WorldGen.genRand.Next(3));
             }
         }
 
@@ -46,7 +49,10 @@ namespace DynastyMod
             int r = WorldGen.genRand.Next(100);
             if (target.type != NPCID.TargetDummy && r == 0)
             {
-                player.QuickSpawnItem(ItemID.GoldCoin, WorldGen.genRand.Next(3));
+                //This is old verison way
+                //Player.QuickSpawnItem(ItemID.GoldCoin, WorldGen.genRand.Next(3));
+                //This is new Version way - I think I have not tested
+                Player.QuickSpawnItem(target.GetSource_FromThis(), ItemID.GoldCoin, WorldGen.genRand.Next(3));
             }
         }
     }

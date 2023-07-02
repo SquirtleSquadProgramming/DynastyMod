@@ -10,27 +10,27 @@ namespace DynastyMod.Items.Placeables
 
         public override void SetDefaults()
         {
-            item.width = 32;
-            item.height = 32;
-            item.value = Item.sellPrice(silver: 24);
-            item.rare = ItemRarityID.LightRed;
-            item.useStyle = ItemUseStyleID.SwingThrow;
-            item.useTurn = true;
-            item.useAnimation = 15;
-            item.useTime = 10;
-            item.autoReuse = true;
-            item.maxStack = 999;
-            item.consumable = true;
-            // item.createTile = ModContent.TileType<Tiles.CutJade>(); temporary because i cbf to sprite another fucking tilesheet for another block
+            Item.width = 32;
+            Item.height = 32;
+            Item.value = Item.sellPrice(silver: 24);
+            Item.rare = ItemRarityID.LightRed;
+            //Item.useStyle = ItemUseStyleID.SwingThrow;
+            Item.useTurn = true;
+            Item.useAnimation = 15;
+            Item.useTime = 10;
+            Item.autoReuse = true;
+            Item.maxStack = 999;
+            Item.consumable = true;
+            // Item.createTile = ModContent.TileType<Tiles.CutJade>(); temporary because i cbf to sprite another fucking tilesheet for another block
         }
-
-        public override void AddRecipes()
+        //They Changed This 
+        /*public override void AddRecipes()
         {
             ModRecipe recipe = new ModRecipe(mod);
             recipe.AddIngredient(ModContent.ItemType<RawJade>(), 1);
             recipe.AddTile(ModContent.TileType<Tiles.GemCutter>());
             recipe.SetResult(this);
             recipe.AddRecipe();
-        }
+        }*/
     }
 }

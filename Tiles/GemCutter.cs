@@ -8,7 +8,8 @@ namespace DynastyMod.Tiles
 {
     public class GemCutter : ModTile
     {
-		public override void SetDefaults()
+        //NGL I dont think that ModTile has a SetDefaults AnyMore prob has a different name
+        /*public override void SetDefaults()
 		{
 			Main.tileSolidTop[Type] = true;
 			Main.tileFrameImportant[Type] = true;
@@ -24,11 +25,12 @@ namespace DynastyMod.Tiles
 			AddMapEntry(new Color(200, 200, 200), name);
 			disableSmartCursor = true;
 			adjTiles = new int[] { TileID.WorkBenches };
-		}
+		}*/
 
-		public override void KillMultiTile(int i, int j, int frameX, int frameY)
+        public override void KillMultiTile(int i, int j, int frameX, int frameY)
 		{
-			Item.NewItem(i * 16, j * 16, 32, 32, ModContent.ItemType<Items.Placeables.GemCutter>());
+			//Item.NewItem has changed now
+			//Item.NewItem(i * 16, j * 16, 32, 32, ModContent.ItemType<Items.Placeables.GemCutter>());
 		}
 	}
 }

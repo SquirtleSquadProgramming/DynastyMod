@@ -14,18 +14,19 @@ namespace DynastyMod.Items
 
 		public override void SetDefaults()
 		{
-			item.damage = 9;
-			item.ranged = true;
-			item.width = 8;
-			item.height = 8;
-			item.maxStack = 1;
-			item.consumable = false;
-			item.knockBack = 1.5f;
-			item.value = 10000;
-			item.rare = ItemRarityID.Green;
-			item.shootSpeed = 16f;
-			item.shoot = ProjectileID.CursedFlameFriendly;
-			item.ammo = 100;
+			Item.damage = 9;
+			//Not how things work anymore
+			//Item.ranged = true;
+			Item.width = 8;
+			Item.height = 8;
+			Item.maxStack = 1;
+			Item.consumable = false;
+			Item.knockBack = 1.5f;
+			Item.value = 10000;
+			Item.rare = ItemRarityID.Green;
+			Item.shootSpeed = 16f;
+			Item.shoot = ProjectileID.CursedFlameFriendly;
+			Item.ammo = 100;
 		}
 	}
 }

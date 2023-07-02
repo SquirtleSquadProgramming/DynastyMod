@@ -16,32 +16,33 @@ namespace DynastyMod.Items.Weapons.Ranged
         public int lastDam = 2;
         public override void SetDefaults()
 		{
-			item.damage = 20;
-			item.ranged = true;
-			item.width = 40;
-			item.height = 20;
-            item.magic = true;
-            item.mana = 2;
-            item.useTime = 20;
-			item.useAnimation = 20;
-			item.useStyle = ItemUseStyleID.HoldingOut;
-			item.noMelee = true;
-			item.knockBack = 4;
-			item.value = 10000;
-			item.rare = ItemRarityID.Green;
-			item.UseSound = SoundID.Item11;
-			item.autoReuse = true;
-			item.shootSpeed = 16f;
-			item.useAmmo = 100;
-			item.shoot = ProjectileID.Bullet;
+			Item.damage = 20;
+			//Item.ranged = true;
+			Item.width = 40;
+			Item.height = 20;
+            //Item.magic = true;
+            Item.mana = 2;
+            Item.useTime = 20;
+			Item.useAnimation = 20;
+			//Item.useStyle = ItemUseStyleID.HoldingOut;
+			Item.noMelee = true;
+			Item.knockBack = 4;
+			Item.value = 10000;
+			Item.rare = ItemRarityID.Green;
+			Item.UseSound = SoundID.Item11;
+			Item.autoReuse = true;
+			Item.shootSpeed = 16f;
+			Item.useAmmo = 100;
+			Item.shoot = ProjectileID.Bullet;
 		}
 
         //Called just before the bullet is made - meant to be used for speacal bullet effects
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+		//This is broken Now - Nathan 2023
+        /*public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
         {
             lastDam = damage - 20;
             return true;
-        }
+        }*/
 
         // Called all the time - modify mana by the damage done by the gun before it shoot - will be changed later when sean tells me how he wants it changed
         public override void ModifyManaCost(Player player, ref float reduce, ref float mult)

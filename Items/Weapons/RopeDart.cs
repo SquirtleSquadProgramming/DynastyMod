@@ -16,23 +16,23 @@ namespace DynastyMod.Items.Weapons
 		}
         public override void SetDefaults()
 		{
-			item.width = 22;
-			item.height = 20;
-			item.value = Item.sellPrice(silver: 5);
-			item.rare = ItemRarityID.White;
-			item.noMelee = true;
-			item.useStyle = ItemUseStyleID.HoldingOut;
-			item.useAnimation = 40;
-			item.useTime = 40;
-			item.knockBack = 4f;
-			item.damage = 9;
-			item.noUseGraphic = true;
-			item.shoot = ModContent.ProjectileType<Projectiles.RopeDartProjectile>();
-			item.shootSpeed = 15.1f;
-			item.UseSound = SoundID.Item1;
-			item.melee = true;
-			item.crit = 9;
-			item.channel = true;
+			Item.width = 22;
+			Item.height = 20;
+			Item.value = Item.sellPrice(silver: 5);
+			Item.rare = ItemRarityID.White;
+			Item.noMelee = true;
+			//Item.useStyle = ItemUseStyleID.HoldingOut;
+			Item.useAnimation = 40;
+			Item.useTime = 40;
+			Item.knockBack = 4f;
+			Item.damage = 9;
+			Item.noUseGraphic = true;
+			Item.shoot = ModContent.ProjectileType<Projectiles.RopeDartProjectile>();
+			Item.shootSpeed = 15.1f;
+			Item.UseSound = SoundID.Item1;
+			//Item.melee = true;
+			Item.crit = 9;
+			Item.channel = true;
 		}
 		/*public override void AddRecipes()
 		{

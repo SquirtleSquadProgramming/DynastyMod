@@ -14,11 +14,11 @@ namespace DynastyMod.Items.Accessories
 
         public override void SetDefaults()
         {
-            item.width = 34;
-            item.height = 32;
-            item.accessory = true;
-            item.value = Item.sellPrice(gold: 1);
-            item.rare = ItemRarityID.Green;
+            Item.width = 34;
+            Item.height = 32;
+            Item.accessory = true;
+            Item.value = Item.sellPrice(gold: 1);
+            Item.rare = ItemRarityID.Green;
         }
 
         public override void UpdateEquip(Player player)

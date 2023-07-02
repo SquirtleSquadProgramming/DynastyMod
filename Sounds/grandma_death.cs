@@ -1,10 +1,11 @@
 ﻿using Microsoft.Xna.Framework.Audio;
 using Terraria.ModLoader;
-
+using Terraria;
 namespace DynastyMod.Sounds
 {
+	//Sound System has changed idk how this shizz works
 
-    public class grandma_death : ModSound
+    /*public class grandma_death : ModSound
     {
 		public override SoundEffectInstance PlaySound(ref SoundEffectInstance soundInstance, float volume, float pan, SoundType type)
 		{
@@ -15,5 +16,5 @@ namespace DynastyMod.Sounds
 			soundInstance.Pitch = 0f;
 			return soundInstance;
 		}
-	}
+	}*/
 }

@@ -18,40 +18,42 @@ namespace DynastyMod.Projectiles
 		
 		public override void SetDefaults()
 		{
-			projectile.width = 34;
-			projectile.height = 44;
-			projectile.friendly = true;
-			projectile.penetrate = -1;
-			projectile.melee = true;
-			projectile.aiStyle = 15;
+			Projectile.width = 34;
+			Projectile.height = 44;
+			Projectile.friendly = true;
+			Projectile.penetrate = -1;
+			//This uses Projectile Types now I think not these goofy ah bool
+			//Projectile.meele = true;
+			Projectile.aiStyle = 15;
 		}
 		public dynamic d = 0;
 		public override void AI()
         {
-			var player = Main.player[projectile.owner];
+			var player = Main.player[Projectile.owner];
 			if (d == 0)
-				d = projectile.velocity.ToRotation() + MathHelper.ToRadians(90f);
-			projectile.rotation = d;
-			//projectile.rotation = vectorToPlayer.ToRotation();
+				d = Projectile.velocity.ToRotation() + MathHelper.ToRadians(90f);
+			Projectile.rotation = d;
+			//Projectile.rotation = vectorToPlayer.ToRotation();
 		}
 		//Draw chain cus defult look as hoe bitch
-		public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+		//This is now brokey with new tmod version so need look at wiki
+		/*public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
 		{
-			var player = Main.player[projectile.owner];
+			var player = Main.player[Projectile.owner];
 
 			Vector2 mountedCenter = player.MountedCenter;
-			Texture2D chainTexture = ModContent.GetTexture(ChainTexturePath);
+			Texture2D chainTexture = ModContent.GetText(ChainTexturePath);
 
-			var drawPosition = projectile.Center;
+			var drawPosition = Projectile.Center;
 			var remainingVectorToPlayer = mountedCenter - drawPosition;
 
 			float rotation = remainingVectorToPlayer.ToRotation() - MathHelper.PiOver2;
 
-			if (projectile.alpha == 0)
+			if (Projectile.alpha == 0)
 			{
 				int direction = -1;
 
-				if (projectile.Center.X < mountedCenter.X)
+				if (Projectile.Center.X < mountedCenter.X)
 					direction = 1;
 
 				player.itemRotation = (float)Math.Atan2(remainingVectorToPlayer.Y * direction, remainingVectorToPlayer.X * direction);
@@ -74,7 +76,7 @@ namespace DynastyMod.Projectiles
 				spriteBatch.Draw(chainTexture, drawPosition - Main.screenPosition, null, color, rotation, chainTexture.Size() * 0.35f, 1f, SpriteEffects.None, 0f);
 			}
 			return true;
-		}
+		}*/
 	}
 
 }
