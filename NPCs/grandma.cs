@@ -5,7 +5,11 @@ using Terraria.Localization;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria.Audio;
-
+using Terraria.ModLoader.Utilities;
+using IL.Terraria.GameContent.ItemDropRules;
+using Terraria.GameContent.ItemDropRules;
+//Why tf are there three differnt ones
+using ItemDropRule = Terraria.GameContent.ItemDropRules.ItemDropRule;
 namespace DynastyMod.NPCs
 {
 
@@ -13,13 +17,12 @@ namespace DynastyMod.NPCs
     {
         public override void SetStaticDefaults()
         {
-            this.DisplayName.SetDefault("Grandma");
+            DisplayName.SetDefault("Grandma");
             Main.npcFrameCount[NPC.type] = Main.npcFrameCount[NPCID.Zombie];
 		}
 		
 		public override void SetDefaults()
 		{
-			
 			NPC.width = 18;
 			NPC.height = 40;
 			NPC.damage = 0;
@@ -27,29 +30,29 @@ namespace DynastyMod.NPCs
 			NPC.lifeMax = 15;
 			NPC.HitSound = SoundID.NPCHit2;
 			//look up how to use custom sounds 
-			//NPC.DeathSound = SoundEngine.PlaySound(SoundType.Sound, "Sounds/grandma_death"); ;
+			//NPC.DeathSound = new SoundStyle("Sounds/grandma_death",SoundType.Sound);
 			NPC.value = 60f;
 			NPC.knockBackResist = 0.5f;
 			NPC.aiStyle = -1;
-			//aiType = NPCID.Zombie;
+			AIType = NPCID.Zombie;
 			AnimationType = NPCID.Zombie;
-			//banner =
-			//NPCtoBanner(NPCID.Zombie);
-			//bannerItem = Item.BannerToItem(banner);
+			Banner = NPCID.Zombie;
+			BannerItem = Item.BannerToItem(Banner);
 			NPC.spriteDirection = 1;
 			NPC.velocity.X = 0.7f;
 			
 		}
 		//Grandma prob wont spawn random might be event npc
-		/*public override float SpawnChance(NPCSpawnInfo spawnInfo)
+		public override float SpawnChance(NPCSpawnInfo spawnInfo)
 		{
 			return SpawnCondition.OverworldDay.Chance * 0.9f;
-		}*/
+		}
 		public override void ModifyNPCLoot(NPCLoot npcloot)
 		{
-			//Check Docs and rewrite
-			//Item.NewItem(NPC.getRect(), (short)ModContent.ItemType<Items.RedEnvelope>());
-		}
+			npcloot.Add(ItemDropRule.Common(ModContent.ItemType<Items.RedEnvelope>(), 2)) ;
+			//This was old code that dont work
+            //Item.NewItem(NPC.GetSource_FromThis(),NPC.getRect(), (short)ModContent.ItemType<Items.RedEnvelope>());
+        }
 
 		public override bool StrikeNPC(ref double damage,int defense,ref float knockback,int hitDirection,ref bool crit)
 		{

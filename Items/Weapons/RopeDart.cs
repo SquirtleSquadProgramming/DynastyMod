@@ -34,14 +34,12 @@ namespace DynastyMod.Items.Weapons
 			Item.crit = 9;
 			Item.channel = true;
 		}
-		/*public override void AddRecipes()
+		public override void AddRecipes()
 		{
-			var recipe = new ModRecipe(mod);
-			recipe.AddIngredient(ItemID.Chain);
-			recipe.AddIngredient(ModContent.ItemType<ExampleItem>(), 10);
-			recipe.AddTile(TileID.WorkBenches);
-			recipe.SetResult(this);
-			recipe.AddRecipe();
-		}*/
+			//This Recipe Needs Work
+			CreateRecipe()
+				.AddIngredient(ItemID.Chain, 3)
+				.Register();
+		}
 	}
 }

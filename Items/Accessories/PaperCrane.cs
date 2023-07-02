@@ -26,13 +26,12 @@ namespace DynastyMod.Items.Accessories
             player.GetModPlayer<DynastyPlayer>().paperCrane = true; 
         }
         //They Changed this system Look online - Nathan 2023
-        /*public override void AddRecipes()
+        public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
-            recipe.AddIngredient(null, "RedEnvelope", 1);
-            recipe.AddIngredient(ItemID.Book, 1);
-            recipe.SetResult(this);
-            recipe.AddRecipe();
-        }*/
+            CreateRecipe()
+                .AddIngredient<RedEnvelope>()
+                .AddIngredient(ItemID.Book)
+                .Register();
+        }
     }
 }

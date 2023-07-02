@@ -101,11 +101,11 @@ namespace DynastyMod.NPCs
                 slot++;
             }
         }
-        /*
-        public override void ModifyNPCLoot()
-        {
-            Item.NewItem(NPC.getRect(), 2);
-        }*/
+        
+        public override void ModifyNPCLoot(NPCLoot npcloot)
+        { 
+            Item.NewItem(NPC.GetSource_FromThis(),NPC.getRect(), 2);
+        }
 
         public override void TownNPCAttackStrength(ref int damage, ref float knockback)
         {

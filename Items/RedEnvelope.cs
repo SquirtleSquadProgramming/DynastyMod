@@ -28,7 +28,7 @@ namespace DynastyMod.Items
 		public override bool CanRightClick() => true;
 
 		//QuickSpawnItem takes diff args now
-		//public override void RightClick(Player player) => player.QuickSpawnItem(ItemID.GoldCoin,  WorldGen.genRand.Next(5)+5);
+		public override void RightClick(Player player) => player.QuickSpawnItem(player.GetSource_FromThis(),ItemID.GoldCoin,  WorldGen.genRand.Next(5)+5);
 		
 	}
 }

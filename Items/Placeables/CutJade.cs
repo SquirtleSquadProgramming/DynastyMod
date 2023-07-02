@@ -24,13 +24,13 @@ namespace DynastyMod.Items.Placeables
             // Item.createTile = ModContent.TileType<Tiles.CutJade>(); temporary because i cbf to sprite another fucking tilesheet for another block
         }
         //They Changed This 
-        /*public override void AddRecipes()
+        public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
-            recipe.AddIngredient(ModContent.ItemType<RawJade>(), 1);
-            recipe.AddTile(ModContent.TileType<Tiles.GemCutter>());
-            recipe.SetResult(this);
-            recipe.AddRecipe();
-        }*/
+            CreateRecipe()
+                .AddIngredient<RawJade>(1)
+                .AddTile<Tiles.GemCutter>()
+                .Register();
+                   
+        }
     }
 }
