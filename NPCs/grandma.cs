@@ -29,8 +29,10 @@ namespace DynastyMod.NPCs
 			NPC.defense = 6;
 			NPC.lifeMax = 15;
 			NPC.HitSound = SoundID.NPCHit2;
-			//look up how to use custom sounds 
-			//NPC.DeathSound = new SoundStyle("Sounds/grandma_death",SoundType.Sound);
+			NPC.DeathSound = new SoundStyle("DynastyMod/Sounds/grandma_death", SoundType.Sound) with
+			{
+				Volume = 0.3f
+			};
 			NPC.value = 60f;
 			NPC.knockBackResist = 0.5f;
 			NPC.aiStyle = -1;
@@ -50,8 +52,6 @@ namespace DynastyMod.NPCs
 		public override void ModifyNPCLoot(NPCLoot npcloot)
 		{
 			npcloot.Add(ItemDropRule.Common(ModContent.ItemType<Items.RedEnvelope>(), 2)) ;
-			//This was old code that dont work
-            //Item.NewItem(NPC.GetSource_FromThis(),NPC.getRect(), (short)ModContent.ItemType<Items.RedEnvelope>());
         }
 
 		public override bool StrikeNPC(ref double damage,int defense,ref float knockback,int hitDirection,ref bool crit)
